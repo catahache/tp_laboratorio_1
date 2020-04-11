@@ -40,7 +40,7 @@ void pause()
 }
 
 //Funcion que muestra un menu diferente depende de como esten las banderas cambiadas por cada opcion
-void menu()//
+void menu()
 {
 	if(flag1 == 1 && flag2 == 1 && flag3 ==0 && flag4 == 0)
 	{
