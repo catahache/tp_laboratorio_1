@@ -14,7 +14,7 @@
  * @param  num1 primer numero a sumar
  * @param  num2 segundo numero a sumar
  * @param  puntero al resultado
- * @return la suma entre num1 y num1
+ * @return 0 si la funcion se concreto con exito, de lo contrario -1
  *
  */
 int sumar(int num1, int num2, int* pResultado);
@@ -25,7 +25,7 @@ int sumar(int num1, int num2, int* pResultado);
  * @param  num1 primer numero a restar
  * @param  num1 segundo numero a restar
  * @param  puntero al resultado
- * @return la resta entre a y b
+ * @return 0 si la funcion se concreto con exito, de lo contrario -1
  *
  */
 int restar(int num1, int num2, int* pResultado);
@@ -36,7 +36,7 @@ int restar(int num1, int num2, int* pResultado);
  * @param  num1 primer numero a dividir
  * @param  num2 segundo numero a dividir
  * @param  puntero al resultado
- * @return la division entre a y b
+ * @return 0 si la funcion se concreto con exito, de lo contrario -1
  *
  */
 float dividir(int num1, int num2, float* pResultado);
@@ -47,7 +47,7 @@ float dividir(int num1, int num2, float* pResultado);
  * @param  num1 primer numero a multiplicar
  * @param  num2 segundo numero a multiplicar
  * @param  puntero al resultado
- * @return la multiplicacion entre a y b
+ * @return 0 si la funcion se concreto con exito, de lo contrario -1
  *
  */
 int multiplicar(int num1, int num2, int* pResultado);
@@ -57,7 +57,7 @@ int multiplicar(int num1, int num2, int* pResultado);
  *
  * @param  num es el numero a factorizar
  * @param  puntero al resultado
- * @return el factorial de num
+ * @return 0 si la funcion se concreto con exito, de lo contrario -1
  *
  */
 long long int factorizar(int num, long long int* pResultado);
