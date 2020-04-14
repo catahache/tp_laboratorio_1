@@ -9,54 +9,84 @@
 #include <stdlib.h>
 #include "operaciones.h"
 
-int suma(int num1, int num2)
+int sumar(int num1, int num2, int* pResultado)
 {
-	int resultadoSuma = num1 + num2;
+	int retorno = -1;
 
-	return resultadoSuma;
+	if(pResultado != NULL)
+	{
+		*pResultado = num1 + num2;
+		retorno = 0;
+	}
+
+
+	return retorno;
 
 }
 
-int resta(int num1, int num2)
+int restar(int num1, int num2, int* pResultado)
 {
-	int resultadoResta = num1 - num2;
+	int retorno = -1;
+	if(pResultado != NULL)
+	{
+		*pResultado = num1 - num2;
+		retorno = 0;
+	}
 
-	return resultadoResta;
-
+	return retorno;
 }
 
-float division(int num1, int num2)
+float dividir(int num1, int num2, float* pResultado)
 {
+	int retorno = -1;
 
-	float resultadoDivision = (float) num1 / num2;
+	if(pResultado != NULL)
+	{
+		*pResultado = (float) num1 / num2;
+		retorno = 0;
+	}
 
-	return resultadoDivision;
+	return retorno;
 }
 
-int multiplicacion(int num1, int num2)
+int multiplicar(int num1, int num2, int* pResultado)
 {
-	int resultadoMultiplicacion = num1 * num2;
+	int retorno = -1;
 
-	return resultadoMultiplicacion;
+	if(pResultado != NULL)
+	{
+		*pResultado = num1 * num2;
+		retorno = 0;
+	}
+
+	return retorno;
 }
 
-long long int factorizacion(int num)
+long long int factorizar(int num, long long int* pResultado) //ver si funciona...
 {
-	unsigned long long resultadoFact = 0;
+	int retorno = -1;
+	unsigned long long resultado = 0;
 
+	if(pResultado != NULL)
+	{
 		if(num >= 0)//retorna 1 si es 0
 		{
 			if (num == 1 || num == 0)//suponiendo que fact de 0 es 1
 			{
-				resultadoFact = 1;
+				resultado = 1;
+				*pResultado = resultado;
 			}
 			else
 			{
-				resultadoFact = num * factorizacion(num - 1);//se llama a si misma
+				resultado = num * factorizar(num - 1, &resultado);//se llama a si misma
+				*pResultado = resultado;
 			}
 		}
+		retorno = 0; //exito
+	}
 
 
-		return resultadoFact;
+
+		return retorno;
 
 }
