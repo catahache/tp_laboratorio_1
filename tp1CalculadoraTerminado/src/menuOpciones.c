@@ -109,14 +109,14 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 	{
 		printf("FUNCA BIEN SOLO CAMBIAR LOS RESULTADOS\n\n");
 		printf("...MENU DE OPCIONES...\n\n");
-		printf("1. Ingresar 1er operando (A=%d) \n", num1);
-		printf("2. Ingresar 2do operando (B=%d) \n", num2);
+		printf("1. Ingresar 1er operando (A=X) \n");
+		printf("2. Ingresar 2do operando (B=Y) \n");
 		printf("3. Calcular todas las operaciones \n");
-		printf("	a) Calcular la suma (%d+%d) \n", num1, num2);
-		printf("	b) Calcular la resta (%d-%d) \n", num1, num2);
-		printf("	c) Calcular la division(%d/%d) \n", num1, num2);
-		printf("	d) Calcular la multiplicacion (%d*%d) \n", num1, num2);
-		printf("	e) Calcular el factorial (%d!) y (%d!) \n", num1, num2);
+		printf("	a) Calcular la suma (A+B) \n");
+		printf("	b) Calcular la resta (A-B) \n");
+		printf("	c) Calcular la division(A/B) \n");
+		printf("	d) Calcular la multiplicacion (A*B) \n");
+		printf("	e) Calcular el factorial (A!) y (B!) \n");
 		printf("4. Informar resultados \n");
 		printf("	a) El resultado de %d+%d es: %d \n", num1, num2, suma);
 		printf("	b) El resultado de %d-%d es: %d \n", num1, num2, resta);
