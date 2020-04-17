@@ -62,10 +62,10 @@ int multiplicar(int num1, int num2, int* pResultado)
 	return retorno;
 }
 
-long long int factorizar(int num, long long int* pResultado) //ver si funciona...
+long long int factorizar(int num, long long int* pResultado)
 {
 	int retorno = -1;
-	unsigned long long resultado = 0;
+	long long int resultado = 0;
 
 	if(pResultado != NULL)
 	{
