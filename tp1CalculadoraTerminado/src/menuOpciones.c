@@ -24,10 +24,10 @@ void pause()
 	return;
 }
 
-void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int suma, int resta, int multi, float divi, unsigned long long fact1, unsigned long long fact2)
+void menu(int num1, int num2, int* pFlag1, int* pFlag2, int* pFlag3, int* pFlag4, int suma, int resta, int multi, float divi, unsigned long long fact1, unsigned long long fact2)
 {
 
-	if(flag1 == 1 && flag2 == 1 && flag3 ==0 && flag4 == 0)
+	if(*pFlag1 == 1 && *pFlag2 == 1 && *pFlag3 ==0 && *pFlag4 == 0)
 	{
 		printf("...MENU DE OPCIONES...\n\n");
 		printf("1. Ingresar 1er operando (A=%d) \n", num1);
@@ -47,7 +47,7 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 		printf("5. Salir \n\n");
 
 	}
-	else if(flag1 == 1 && flag2==0)//Se ha cargado solo el 1er op
+	else if(*pFlag1 == 1 && *pFlag2==0)//Se ha cargado solo el 1er op
 	{
 		printf("...MENU DE OPCIONES...\n\n");
 		printf("1. Ingresar 1er operando (A=%d) \n", num1);
@@ -66,7 +66,7 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 		printf("	e) El factorial de %d es: r y El factorial de B es: r \n", num1);
 		printf("5. Salir \n\n");
 	}
-	else if(flag1 == 0 && flag2 == 0)//El primero que aparece
+	else if(*pFlag1 == 0 && *pFlag2 == 0)//El primero que aparece
 	{
 		printf("...MENU DE OPCIONES...\n\n");
 		printf("1. Ingresar 1er operando (A=X) \n");
@@ -86,7 +86,7 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 		printf("5. Salir \n\n");
 
 	}
-	else if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 0)
+	else if(*pFlag1 == 1 && *pFlag2 == 1 && *pFlag3 == 1 && *pFlag4 == 0)
 	{
 		printf("...MENU DE OPCIONES...\n\n");
 		printf("1. Ingresar 1er operando (A=%d) \n", num1);
@@ -105,7 +105,7 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 		printf("	e) El factorial de %d es: r y El factorial de %d es: r \n", num1, num2);
 		printf("5. Salir \n\n");
 	}
-	else if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1)
+	else if(*pFlag1 == 1 && *pFlag2 == 1 && *pFlag3 == 1 && *pFlag4 == 1)
 	{
 		printf("...MENU DE OPCIONES...\n\n");
 		printf("1. Ingresar 1er operando (A=X) \n");
@@ -131,23 +131,29 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 
 		printf("	d) El resultado de %d*%d es: %d \n", num1, num2, multi);
 		//validar factorial
-		if(num1 < 0)
+		if(num1 < 0 || num1 > 33) //funciona hasta el 33
 		{
-			printf("	e) No puede realizarse el factorial de un numero negativo y El factorial de %d es: %llu \n", num2, fact2);
+			printf("	e) No puede realizarse el factorial del numero y El factorial de %d es: %llu \n", num2, fact2);
 		}
-		if(num2 < 0)
+		else if(num2 < 0 || num2 > 33)
 		{
-			printf("	e) El factorial de %d es: %llu y No puede realizarse el factorial de un numero negativo \n", num1, fact1);
+			printf("	e) El factorial de %d es: %llu y No puede realizarse el factorial del numero \n", num1, fact1);
 		}
-		if(num1 < 0 && num2 < 0)
+		else if((num1 < 0 && num2 < 0) || (num1 > 33 && num2 > 33))
 		{
-			printf("	e) No puede realizarse el factorial de un numero negativo \n");
+			printf("	e) No puede realizarse el factorial de los numeros \n");
 		}
 		else
 		{
 			printf("	e) El factorial de %d es: %llu y El factorial de %d es: %llu \n", num1, fact1, num2, fact2);
 		}
 		printf("5. Salir \n\n");
+		//volver las banderas a 0:
+		*pFlag1 = 0;
+		*pFlag2 = 0;
+		*pFlag3 = 0;
+		*pFlag4 = 0;
+
 	}
 
 }

@@ -22,10 +22,10 @@ void pause();
  *
  *@param numero 1
  *@param numero 2
- *@param bandera de la opcion 1
- *@param bandera de la opcion 2
- *@param bandera de la opcion 3
- *@param bandera de la opcion 4
+ *@param puntero a la bandera de la opcion 1
+ *@param puntero a la bandera de la opcion 2
+ *@param puntero a la bandera de la opcion 3
+ *@param puntero a la bandera de la opcion 4
  *@param resultado de la suma
  *@param resultado de la resta
  *@param resultado de la multiplicacion
@@ -36,7 +36,7 @@ void pause();
  *@return void
  *
  */
-void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int suma, int resta, int multi, float divi, unsigned long long fact1, unsigned long long fact2);
+void menu(int num1, int num2, int* pFlag1, int* pFlag2, int* pFlag3, int* pFlag4, int suma, int resta, int multi, float divi, unsigned long long fact1, unsigned long long fact2);
 
 
 /**

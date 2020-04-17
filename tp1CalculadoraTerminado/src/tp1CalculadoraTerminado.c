@@ -45,7 +45,7 @@ int main(void) {
 	do{
 		system("clear");
 
-		menu(num1, num2, flag1, flag2, flag3, flag4, resulSuma, resulResta, resulMultiplicacion, resulDivision, resulFact1, resulFact2); //llamo al menu y luego pido al user que elija una opcion:
+		menu(num1, num2, &flag1, &flag2, &flag3, &flag4, resulSuma, resulResta, resulMultiplicacion, resulDivision, resulFact1, resulFact2); //llamo al menu y luego pido al user que elija una opcion:
 
 		printf("Elija una opcion: ");
 		scanf("%d", &opcion);
