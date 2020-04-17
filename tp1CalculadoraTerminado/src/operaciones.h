@@ -56,10 +56,10 @@ int multiplicar(int num1, int num2, int* pResultado);
  * @brief  Realiza el factorial de un numero
  *
  * @param  num es el numero a factorizar
- * @param  puntero al resultado
- * @return 0 si la funcion se concreto con exito, de lo contrario -1
+ * @return fact del numero
  *
  */
-long long int factorizar(int num, long long int* pResultado);
+
+unsigned long long factorial (int num);
 
 #endif /* OPERACIONES_H_ */

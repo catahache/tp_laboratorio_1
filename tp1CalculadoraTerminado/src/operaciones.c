@@ -62,31 +62,22 @@ int multiplicar(int num1, int num2, int* pResultado)
 	return retorno;
 }
 
-long long int factorizar(int num, long long int* pResultado)
-{
-	int retorno = -1;
-	long long int resultado = 0;
 
-	if(pResultado != NULL)
+unsigned long long factorial (int num)
+{
+	unsigned fact = 0;
+
+	if(num >= 0)//retorna 1 si es 0
 	{
-		if(num >= 0)//retorna 1 si es 0
+		if (num == 1 || num == 0)// fact de 0 es 1 segun algunos
 		{
-			if (num == 1 || num == 0)//suponiendo que fact de 0 es 1
-			{
-				resultado = 1;
-				*pResultado = resultado;
-			}
-			else
-			{
-				resultado = num * factorizar(num - 1, &resultado);//se llama a si misma
-				*pResultado = resultado;
-			}
+			fact = 1;
 		}
-		retorno = 0; //exito
+		else
+		{
+			fact = num * factorial(num - 1);//se llama a si misma
+		}
 	}
 
-
-
-		return retorno;
-
+	return fact;
 }

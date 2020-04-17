@@ -8,6 +8,15 @@
  ============================================================================
 
  */
+/*
+ ============================================================================
+ Name        : tp1CalculadoraTerminado.c
+ Author      :
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,8 +37,8 @@ int main(void) {
 	int resulResta;
 	int resulMultiplicacion;
 	float resulDivision;
-	long long int resulFact1;
-	long long int resulFact2;
+	unsigned long long resulFact1;
+	unsigned long long resulFact2;
 
 
 
@@ -44,12 +53,10 @@ int main(void) {
 		switch(opcion)//depende la opcion que elija, va a alguno de los cases
 		{
 			case 1:
-				//FALTA VALIDAR QUE NO INGRESE LETRAS
 				opcion1(&flag1, &num1);
 				break;
 
 			case 2:
-				//FALTA VALIDAR QUE NO INGRESE LETRAS
 				opcion2(flag1, &flag2, &num2);
 				break;
 

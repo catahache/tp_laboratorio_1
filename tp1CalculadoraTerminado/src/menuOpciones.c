@@ -24,7 +24,7 @@ void pause()
 	return;
 }
 
-void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int suma, int resta, int multi, float divi, long long int fact1, long long int fact2)
+void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int suma, int resta, int multi, float divi, unsigned long long fact1, unsigned long long fact2)
 {
 
 	if(flag1 == 1 && flag2 == 1 && flag3 ==0 && flag4 == 0)
@@ -107,7 +107,6 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 	}
 	else if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1)
 	{
-		printf("FUNCA BIEN SOLO CAMBIAR LOS RESULTADOS\n\n");
 		printf("...MENU DE OPCIONES...\n\n");
 		printf("1. Ingresar 1er operando (A=X) \n");
 		printf("2. Ingresar 2do operando (B=Y) \n");
@@ -131,7 +130,23 @@ void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int su
 		}
 
 		printf("	d) El resultado de %d*%d es: %d \n", num1, num2, multi);
-		printf("	e) El factorial de %d es: %lld y El factorial de %d es: %lld \n", num1, fact1, num2, fact2);
+		//validar factorial
+		if(num1 < 0)
+		{
+			printf("	e) No puede realizarse el factorial de un numero negativo y El factorial de %d es: %llu \n", num2, fact2);
+		}
+		if(num2 < 0)
+		{
+			printf("	e) El factorial de %d es: %llu y No puede realizarse el factorial de un numero negativo \n", num1, fact1);
+		}
+		if(num1 < 0 && num2 < 0)
+		{
+			printf("	e) No puede realizarse el factorial de un numero negativo \n");
+		}
+		else
+		{
+			printf("	e) El factorial de %d es: %llu y El factorial de %d es: %llu \n", num1, fact1, num2, fact2);
+		}
 		printf("5. Salir \n\n");
 	}
 
@@ -185,7 +200,7 @@ int opcion2(int flag1, int* pFlag2, int* pNum2)
 
 }
 
-int opcion3(int flag1, int flag2, int* pFlag3, int numero1, int numero2, int* pSuma, int* pResta, int* pMulti, float* pDivi, long long int* pFact1, long long int* pFact2)
+int opcion3(int flag1, int flag2, int* pFlag3, int numero1, int numero2, int* pSuma, int* pResta, int* pMulti, float* pDivi, unsigned long long* pFact1, unsigned long long* pFact2)
 {
 	int flag3;
 	int retorno = -1;
@@ -193,8 +208,8 @@ int opcion3(int flag1, int flag2, int* pFlag3, int numero1, int numero2, int* pS
 	int resultadoResta;
 	float resultadoDivision;
 	int resultadoMultiplicacion;
-	long long int resultadoFact1;
-	long long int resultadoFact2;
+	//unsigned long long resultadoFact1;
+	//unsigned long long resultadoFact2;
 
 
 	if(flag1 == 0)
@@ -225,11 +240,8 @@ int opcion3(int flag1, int flag2, int* pFlag3, int numero1, int numero2, int* pS
 		multiplicar(numero1, numero2, &resultadoMultiplicacion);
 		*pMulti = resultadoMultiplicacion;
 
-		factorizar(numero1, &resultadoFact1);
-		*pFact1 = resultadoFact1;
-
-		factorizar(numero2, &resultadoFact2);
-		*pFact2 = resultadoFact2;
+		*pFact1 = factorial (numero1);
+		*pFact2 = factorial (numero2);
 
 		printf("Calculando...");
 		pause();

@@ -36,7 +36,7 @@ void pause();
  *@return void
  *
  */
-void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int suma, int resta, int multi, float divi, long long int fact1, long long int fact2);
+void menu(int num1, int num2, int flag1, int flag2, int flag3, int flag4, int suma, int resta, int multi, float divi, unsigned long long fact1, unsigned long long fact2);
 
 
 /**
@@ -80,7 +80,7 @@ int opcion2(int flag1, int* pFlag2, int* pNum2);
  *@return 0 si la funcion se realiza con exito, o -1 si no lo hace
  *
  */
-int opcion3(int flag1, int flag2, int* pFlag3, int numero1, int numero2, int* pSuma, int* pResta, int* pMulti, float* pDivi, long long int* pFact1, long long int* pFact2);
+int opcion3(int flag1, int flag2, int* pFlag3, int numero1, int numero2, int* pSuma, int* pResta, int* pMulti, float* pDivi, unsigned long long* pFact1, unsigned long long* pFact2);
 
 /**
  *@brief  Cambia la flag4 para que en el menu se muestren los resultados
