@@ -286,38 +286,47 @@ int modifyEmployees(Employee list[], int len, eSector sectors[], int lenSec)
 int sortEmployees(Employee* list, int len, int order)
 {
 	//agrupar por sector y ordenar por apellido
+	int isOk = -1;
 	Employee auxEmployee;
 
-	for(int i = 0; i < len -1; i++)
+	if(list != NULL)
 	{
-		for(int j = i + 1; j < len; j ++)
+		for(int i = 0; i < len -1; i++)
 		{
-			if(list[i].isEmpty == 0 && list[j].isEmpty == 0) //solo hace el burbujeo si no estan vacias las posiciones
+			for(int j = i + 1; j < len; j ++)
 			{
-				if(order == 1)
-				{
-					if(list[i].idSector > list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) > 0)) //de menor a mayor
-					{
-						auxEmployee = list[i];
-						list[i] = list[j];
-						list[j] = auxEmployee;
-					}
+				isOk = 0;
 
-				}
-				else if(order == 0)
+				if(list[i].isEmpty == 0 && list[j].isEmpty == 0) //solo hace el burbujeo si no estan vacias las posiciones
 				{
-					if(list[i].idSector < list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) < 0)) //de mayor a menor
+					if(order == 1)
 					{
-						auxEmployee = list[i];
-						list[i] = list[j];
-						list[j] = auxEmployee;
-					}
+						if(list[i].idSector > list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) > 0)) //de menor a mayor
+						{
+							auxEmployee = list[i];
+							list[i] = list[j];
+							list[j] = auxEmployee;
+						}
 
+					}
+					else if(order == 0)
+					{
+						if(list[i].idSector < list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) < 0)) //de mayor a menor
+						{
+							auxEmployee = list[i];
+							list[i] = list[j];
+							list[j] = auxEmployee;
+						}
+
+					}
 				}
-			}
+			}//for
 		}//for
-	}//for
-	return 0;
+
+	}
+
+
+	return isOk;
 }
 
 
