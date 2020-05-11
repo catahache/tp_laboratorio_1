@@ -19,7 +19,7 @@
 
 int menuEmployees()
 {
-	int opcion;
+	int option;
 
 	system("clear");
 
@@ -30,10 +30,11 @@ int menuEmployees()
 	printf("  4. INFORMAR\n");
 	printf("  5. SALIR\n\n");
 
-	printf("Ingresar opcion elegida: ");
-	scanf("%d", &opcion);
+	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 5);
+	//printf("Ingresar opcion elegida: ");
+	//scanf("%d", &opcion);
 
-	return opcion;
+	return option;
 }
 
 int initEmployees(Employee list[], int len)
@@ -52,6 +53,64 @@ int initEmployees(Employee list[], int len)
 	}
 }
 
+void showEmployee(Employee auxEmployee, eSector sectors[], int lenSec)
+{
+	char descripSector[20];
+
+	loadSectorDescription(descripSector, auxEmployee.idSector, sectors, lenSec); //carga la descripcion del sector
+
+	printf("%d   %10s   %10s    %.2f    %10s\n", auxEmployee.id, auxEmployee.name, auxEmployee.lastName, auxEmployee.salary, descripSector);
+}
+
+void showEmployees(Employee list[], int len, eSector sectors[], int lenSec)
+{
+	printf(" ID       Nombre       Apellido    Salario       Sector\n\n");
+	for(int i = 0; i < len; i++)
+	{
+		if(list[i].isEmpty == 0)
+		{
+			showEmployee(list[i], sectors, lenSec);
+		}
+	}
+}
+
+
+int findEmployeeById(Employee list[], int len, int id)
+{
+	int exists = -1;
+
+	if(list != NULL && len > 0)
+	{
+		for(int i = 0; i < len; i++)
+		{
+			if(id == list[i].id)
+			{
+				exists = i; //devuelve el indice donde esta ese legajo cargado
+				break;
+			}
+		}
+	}
+	return exists;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//ALTA:
+
+int lookForEmpty(Employee list[], int len)
+{
+	int index = -1; //retorna -1 si no hay lugares vacios
+
+	for(int i = 0; i < len; i++)
+	{
+		if(list[i].isEmpty == 1)
+		{
+			index = i; //retorna el primer subindice vacio
+			break;
+		}
+	}
+	return index;
+}
+
 int collectData(Employee list[], int len, int* nextId, char auxName[], char auxLastname[], float* auxSalary, int* auxSector, int* index)
 {
 	int id = *nextId;
@@ -68,10 +127,10 @@ int collectData(Employee list[], int len, int* nextId, char auxName[], char auxL
 		}
 		else
 		{
-			utn_getCadena(auxName, 50, 300, "\nIngrese nombre: ", "El nombre ingresado es invalido.\n");
-			utn_getCadena(auxLastname, 50, 300, "Ingrese apellido: ", "El apellido ingresado es invalido.\n");
-			utn_getFlotante(auxSalary, 300, "Ingrese salario: ", "El salario ingresado no es valido.\n", 12000.00, 300000.00);
-			utn_getEntero(auxSector, 300, "Ingrese sector: ", "El sector ingresado no es valido.\n", 1, 5);
+			utn_getCadena(auxName, 50, 3, "\nIngrese nombre: ", "El nombre ingresado es invalido.\n");
+			utn_getCadena(auxLastname, 50, 3, "Ingrese apellido: ", "El apellido ingresado es invalido.\n");
+			utn_getFlotante(auxSalary, 3, "Ingrese salario: ", "El salario ingresado no es valido.\n", 12000.00, 300000.00);
+			utn_getEntero(auxSector, 3, "Ingrese sector: ", "El sector ingresado no es valido.\n", 1, 5);
 
 			*nextId = newId;
 			isOk = 0;
@@ -100,38 +159,9 @@ int addEmployee(Employee list[], int len, int id, char name[], char lastName[], 
 	return isOk;
 }
 
-int lookForEmpty(Employee list[], int len)
-{
-	int index = -1; //retorna -1 si no hay lugares vacios
 
-	for(int i = 0; i < len; i++)
-	{
-		if(list[i].isEmpty == 1)
-		{
-			index = i; //retorna el primer subindice vacio
-			break;
-		}
-	}
-	return index;
-}
-
-int findEmployeeById(Employee list[], int len, int id)
-{
-	int exists = -1;
-
-	if(list != NULL && len > 0)
-	{
-		for(int i = 0; i < len; i++)
-		{
-			if(id == list[i].id)
-			{
-				exists = i; //devuelve el indice donde esta ese legajo cargado
-				break;
-			}
-		}
-	}
-	return exists;
-}
+//------------------------------------------------------------------------------------------------------------------------------
+//BAJA:
 
 int removeEmployee(Employee list[], int len, int id, eSector sectors[], int lenSec)
 {
@@ -176,26 +206,10 @@ int removeEmployee(Employee list[], int len, int id, eSector sectors[], int lenS
 	return isOk;
 }
 
-void showEmployee(Employee auxEmployee, eSector sectors[], int lenSec)
-{
-	char descripSector[20];
 
-	loadSectorDescription(descripSector, auxEmployee.idSector, sectors, lenSec); //carga la descripcion del sector
 
-	printf("%d   %10s   %10s    %.2f    %10s\n", auxEmployee.id, auxEmployee.name, auxEmployee.lastName, auxEmployee.salary, descripSector);
-}
-
-void showEmployees(Employee list[], int len, eSector sectors[], int lenSec)
-{
-	printf(" ID       Nombre       Apellido    Salario       Sector\n\n");
-	for(int i = 0; i < len; i++)
-	{
-		if(list[i].isEmpty == 0)
-		{
-			showEmployee(list[i], sectors, lenSec);
-		}
-	}
-}
+//------------------------------------------------------------------------------------------------------------------------------
+//MODIFICACION:
 
 int modifyEmployees(Employee list[], int len, eSector sectors[], int lenSec)
 {
@@ -212,6 +226,7 @@ int modifyEmployees(Employee list[], int len, eSector sectors[], int lenSec)
 
 	system("clear");
 	printf("***** Modificaciones *****\n\n");
+	showEmployees(list, len, sectors, lenSec);
 	if(list != NULL && len > 0 && utn_getEntero(&auxId, 3, "\nIngrese ID de la persona a modificar: ", "Error. No es un ID.\n", 1000, 2000) == 0 )
 	{
 		index = findEmployeeById(list, len, auxId); //encuentra al empleado a modificar
@@ -231,7 +246,6 @@ int modifyEmployees(Employee list[], int len, eSector sectors[], int lenSec)
 			{
 				do
 				{
-					system("clear");
 					printf("    1. Modificar nombre\n");
 					printf("    2. Modificar apellido\n");
 					printf("    3. Modificar salario\n");
@@ -262,7 +276,7 @@ int modifyEmployees(Employee list[], int len, eSector sectors[], int lenSec)
 							printf("No es una opcion valida.\n\n");
 					}
 					printf("Se han modificado los datos correctamente. \n");
-					printf("ID    Nombre    Apellido     Salario     Sector\n");
+					printf("ID         Nombre     Apellido    Salario        Sector\n");
 					showEmployee(list[index], sectors, lenSec); //muestro el empleado con los datos modificados
 					printf("Desea seguir modificando? s/n: ");
 					fpurge(stdin);
@@ -283,54 +297,10 @@ int modifyEmployees(Employee list[], int len, eSector sectors[], int lenSec)
 	return isOk;
 }
 
-int sortEmployees(Employee* list, int len, int order)
-{
-	//agrupar por sector y ordenar por apellido
-	int isOk = -1;
-	Employee auxEmployee;
-
-	if(list != NULL)
-	{
-		for(int i = 0; i < len -1; i++)
-		{
-			for(int j = i + 1; j < len; j ++)
-			{
-				isOk = 0;
-
-				if(list[i].isEmpty == 0 && list[j].isEmpty == 0) //solo hace el burbujeo si no estan vacias las posiciones
-				{
-					if(order == 1)
-					{
-						if(list[i].idSector > list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) > 0)) //de menor a mayor
-						{
-							auxEmployee = list[i];
-							list[i] = list[j];
-							list[j] = auxEmployee;
-						}
-
-					}
-					else if(order == 0)
-					{
-						if(list[i].idSector < list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) < 0)) //de mayor a menor
-						{
-							auxEmployee = list[i];
-							list[i] = list[j];
-							list[j] = auxEmployee;
-						}
-
-					}
-				}
-			}//for
-		}//for
-
-	}
 
 
-	return isOk;
-}
-
-
-//Informes:
+//------------------------------------------------------------------------------------------------------------------------------
+//INFORMES:
 
 int menuInform()
 {
@@ -339,8 +309,8 @@ int menuInform()
 	system("clear");
 	printf("\n***** Informes *****\n\n");
 
-	printf("1.Listar empleados ordenados alfabeticamente por Apellido y agrupados por Sector.\n");
-	printf("2.Total y promedio de los salarios\n");
+	printf("1. Listar empleados ordenados alfabeticamente por Apellido y agrupados por Sector\n");
+	printf("2. Total y promedio de los salarios\n");
 	printf("3. Salir\n\n");
 
 	utn_getEntero(&opcion, 300, "Ingrese la opcion elegida: ", "Error, no es una opcion valida.\n", 1, 3);
@@ -367,9 +337,12 @@ int inform(Employee list[], int len, eSector sectors[], int lenSec)
 					printf("\n");
 					sortEmployees(list, len, ascDes);
 					showEmployees(list, len, sectors, lenSec);
+					pause();
+					isOk = 0;//exito
 					break;
 				case 2:
 					totalAndPromedySalaries(list, len);
+					isOk = 0;//exito
 					break;
 				case 3:
 					printf("Confirma salida? s/n: ");
@@ -379,15 +352,60 @@ int inform(Employee list[], int len, eSector sectors[], int lenSec)
 					{
 						continueI = 'n';
 					}
+					isOk = 0;//exito
 					break;
 				default:
 					printf("No es una opcionn valida.\n\n");
 			}
-
 		}while(continueI == 's');
-
-		isOk = 0;//exito
 	}
+	return isOk;
+}
+
+int sortEmployees(Employee* list, int len, int order)
+{
+	//agrupar por sector y ordenar por apellido
+	int isOk = -1;
+	Employee auxEmployee;
+
+	if(list != NULL)
+	{
+		for(int i = 0; i < len -1; i++)
+		{
+			for(int j = i + 1; j < len; j ++)
+			{
+				isOk = 0;
+
+				if(list[i].isEmpty == 0 && list[j].isEmpty == 0) //solo hace el burbujeo si no estan vacias las posiciones
+				{
+
+					switch(order)
+					{
+						case 1:
+							if(list[i].idSector > list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) > 0)) //de menor a mayor sector (agrupa) y apellido (ordena)
+							{
+								auxEmployee = list[i];
+								list[i] = list[j];
+								list[j] = auxEmployee;
+							}
+							break;
+
+						case 2:
+							if(list[i].idSector < list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) < 0)) //de mayor a menor sector (agrupa) y apellido (ordena)
+							{
+								auxEmployee = list[i];
+								list[i] = list[j];
+								list[j] = auxEmployee;
+							}
+							break;
+
+						default:
+							printf("No es un orden valido.\n");
+					}
+				}//if isEmpty
+			}//for
+		}//for
+	}//if list != NULL
 	return isOk;
 }
 
@@ -399,29 +417,34 @@ int totalAndPromedySalaries(Employee* list, int len)
 	float promedy;
 	int countEmployeesHigher = 0; //cuenta cuantos empleados superan el salario promedio
 
-	for(int i = 0; i < len; i++)
+	if(list != NULL && len > 0)
 	{
-		if(list[i].isEmpty == 0)
+		for(int i = 0; i < len; i++)
 		{
-			accumSalaries += list[i].salary;
-			countEmployees++;
-		}
-	}
-
-	promedy = (float) accumSalaries / countEmployees;
-
-	for(int i = 0; i < len; i++)
-	{
-		if(list[i].isEmpty == 0 && list[i].salary > promedy)
-		{
-			countEmployeesHigher++;
+			if(list[i].isEmpty == 0)
+			{
+				accumSalaries += list[i].salary;
+				countEmployees++;
+			}
 		}
 
+		promedy = (float) accumSalaries / countEmployees;
+
+		for(int i = 0; i < len; i++)
+		{
+			if(list[i].isEmpty == 0 && list[i].salary > promedy)
+			{
+				countEmployeesHigher++;
+			}
+
+		}
+		isOk = 0;
+
+		printf("\nEl total de los salarios de los %d empleados en sistema es de: %.2f\n", countEmployees, accumSalaries);
+		printf("El promedio de todos los salarios es de: %.2f\n", promedy);
+		printf("Hay %d empleados que superan el salario promedio.\n\n", countEmployeesHigher);
 	}
 
-	printf("\nEl total de los salarios de los %d empleados en sistema es de: %.2f\n", countEmployees, accumSalaries);
-	printf("El promedio de todos los salarios es de: %.2f\n", promedy);
-	printf("Hay %d empleados que superan el salario promedio.\n\n", countEmployeesHigher);
 
 	return isOk;
 }

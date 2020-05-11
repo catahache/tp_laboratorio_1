@@ -64,7 +64,7 @@ int main(void) {
 		{
 			case 1:
 				printf("\n***** Altas *****\n\n ");
-				utn_getEntero(&cuant, 1000, "Cuantos empleados desea ingresar?: ", "Error, la cantidad ingresada es superior a la capacidad establecida o inferior 0.\n", 1, 1000);
+				utn_getEntero(&cuant, 3, "Cuantos empleados desea ingresar?: ", "Error, la cantidad ingresada es superior a la capacidad establecida o inferior 0.\n", 1, 1000);
 				do
 				{
 					if(collectData(employeeList, LEN, &nextId, auxName, auxLastname, &auxSalary, &auxSector, &index) == 0 && addEmployee(employeeList, LEN, nextId, auxName, auxLastname, auxSalary, auxSector, index) == 0)
@@ -82,7 +82,7 @@ int main(void) {
 				}
 				else
 				{
-					printf("Primero debe cargar empleados.\n");
+					printf("Error. Primero debe cargar empleados.\n");
 				}
 				break;
 
@@ -93,6 +93,7 @@ int main(void) {
 					printf("\n***** Bajas *****\n\n ");
 					do
 					{
+						showEmployees(employeeList, LEN, sectors, LENSEC);
 						if(utn_getEntero(&auxId, 300, "Ingrese ID del empleado a eliminar: ", "Error, no es un numero de ID.\n", 1000, 2000) == 0)
 						{
 							removeEmployee(employeeList, LEN, auxId, sectors, LENSEC);
