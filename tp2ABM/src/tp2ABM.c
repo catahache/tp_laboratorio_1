@@ -36,7 +36,7 @@ int main(void) {
 	char continueR;
 	int index;
 	int cuant;
-	int i = 0;
+	int i = 1;
 
 	//Variables a ser escritas por collectData y luego leidas por addEmployee:
 	char auxName[51];
@@ -66,12 +66,13 @@ int main(void) {
 				utn_getEntero(&cuant, 3, "Cuantos empleados desea ingresar?: ", "Error, la cantidad ingresada es superior a la capacidad establecida o inferior 0.\n", 1, 1000);
 				do
 				{
+					i++;
 					if(collectData(employeeList, LEN, &nextId, auxName, auxLastname, &auxSalary, &auxSector, &index) == 0 && addEmployee(employeeList, LEN, nextId, auxName, auxLastname, auxSalary, auxSector, index) == 0)
 					{
 						flag1 = 1; //modifico el flag de alta si las dos funciones retornaron 0
 					}
-					i++;
-				}while(i < cuant);
+
+				}while(i <= cuant);
 				break;
 
 			case 2:
