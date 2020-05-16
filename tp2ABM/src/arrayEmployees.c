@@ -438,11 +438,15 @@ int totalAndPromedySalaries(Employee* list, int len)
 		}
 		isOk = 0;
 
-		printf("\nEl total de los salarios de los %d empleados en sistema es de: %.2f\n", countEmployees, accumSalaries);
-		printf("El promedio de todos los salarios es de: %.2f\n", promedy);
+		printf("\nEl total de los salarios de los %d empleados en sistema es de: $ %.2f\n", countEmployees, accumSalaries);
+		printf("El promedio de todos los salarios es de: $ %.2f\n", promedy);
 		if(countEmployeesHigher == 1)
 		{
 			printf("Hay %d empleado que supera el salario promedio.\n\n", countEmployeesHigher);
+		}
+		else if(countEmployeesHigher < 1)
+		{
+			printf("No hay empleados que superen el salario promedio.\n\n");
 		}
 		else
 		{
