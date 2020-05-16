@@ -48,13 +48,12 @@ int main(void) {
 	//Flag Alta:
 	int flag1 = 0; //Ponerla en 1 para harcodear
 
-	//-----------------------
-	//int proximoId = 1000;
-
 	initEmployees(employeeList, LEN);
 	//-------------------
+	//HARCODEO:
 	//harcodearEmpleados(employeeList, CANTHARDCODE); //hardcodeo 5 empleados
 	//proximoId += CANTHARDCODE;
+	//int proximoId = 1000;
 
 	do
 	{
