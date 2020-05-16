@@ -36,7 +36,7 @@ int main(void) {
 	char continueR;
 	int index;
 	int cuant;
-	int i = 1;
+	int i = 0;
 
 	//Variables a ser escritas por collectData y luego leidas por addEmployee:
 	char auxName[51];
@@ -72,7 +72,8 @@ int main(void) {
 						flag1 = 1; //modifico el flag de alta si las dos funciones retornaron 0
 					}
 
-				}while(i <= cuant);
+				}while(i < cuant);
+				i = 0;
 				break;
 
 			case 2:

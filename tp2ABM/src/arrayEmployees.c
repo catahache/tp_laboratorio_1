@@ -390,7 +390,7 @@ int sortEmployees(Employee* list, int len, int order)
 							}
 							break;
 
-						case 2:
+						case 0:
 							if(list[i].idSector < list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) < 0)) //de mayor a menor sector (agrupa) y apellido (ordena)
 							{
 								auxEmployee = list[i];
@@ -450,6 +450,7 @@ int totalAndPromedySalaries(Employee* list, int len)
 		{
 			printf("Hay %d empleados que superan el salario promedio.\n\n", countEmployeesHigher);
 		}
+		pause();
 
 	}
 
