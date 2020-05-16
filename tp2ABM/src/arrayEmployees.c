@@ -381,15 +381,6 @@ int sortEmployees(Employee* list, int len, int order)
 
 					switch(order)
 					{
-						case 1:
-							if(list[i].idSector > list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) > 0)) //de menor a mayor sector (agrupa) y apellido (ordena)
-							{
-								auxEmployee = list[i];
-								list[i] = list[j];
-								list[j] = auxEmployee;
-							}
-							break;
-
 						case 0:
 							if(list[i].idSector < list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) < 0)) //de mayor a menor sector (agrupa) y apellido (ordena)
 							{
@@ -398,7 +389,14 @@ int sortEmployees(Employee* list, int len, int order)
 								list[j] = auxEmployee;
 							}
 							break;
-
+						case 1:
+							if(list[i].idSector > list[j].idSector || (list[i].idSector == list[j].idSector && (strcmp(list[i].lastName, list[j].lastName)) > 0)) //de menor a mayor sector (agrupa) y apellido (ordena)
+							{
+								auxEmployee = list[i];
+								list[i] = list[j];
+								list[j] = auxEmployee;
+							}
+							break;
 						default:
 							printf("No es un orden valido.\n");
 					}

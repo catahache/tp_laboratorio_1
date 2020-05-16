@@ -18,7 +18,7 @@
 #define LEN 1000 //array empleados
 #define LENSEC 5 //array sectores
 //-------------------
-#define CANTHARDCODE 7
+//#define CANTHARDCODE 7
 
 
 int main(void) {
@@ -94,7 +94,7 @@ int main(void) {
 					do
 					{
 						showEmployees(employeeList, LEN, sectors, LENSEC);
-						if(utn_getEntero(&auxId, 300, "Ingrese ID del empleado a eliminar: ", "Error, no es un numero de ID.\n", 1000, 2000) == 0)
+						if(utn_getEntero(&auxId, 3, "Ingrese ID del empleado a eliminar: ", "Error, no es un numero de ID.\n", 1000, 2000) == 0)
 						{
 							removeEmployee(employeeList, LEN, auxId, sectors, LENSEC);
 						}
