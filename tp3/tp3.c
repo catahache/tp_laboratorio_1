@@ -73,6 +73,14 @@ int main()
             	}
             	break;
             case 4:
+            	if(flagText == 1 || flagBin == 1)
+				{
+					controller_editEmployee(listaEmpleados);
+				}
+				else
+				{
+					printf("Error. Aun no se cargo ningun archivo.\n");
+				}
             	break;
             case 5:
             	if(flagText == 1 || flagBin == 1)

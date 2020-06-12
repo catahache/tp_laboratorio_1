@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Employee.h"
 #include "utn.h"
 
@@ -181,7 +182,7 @@ int employee_printEmployee(LinkedList* pArrayListEmployee, int index)
 		   employee_getHorasTrabajadas(pEmployee, &auxHours) == 0 &&
 		   employee_getSueldo(pEmployee, &auxSalary) == 0)
 		{
-			printf("%10d    %10s    %10d    %10d\n", auxId, auxName, auxHours, auxSalary);
+			printf("%5d    %10s    %10d    %10d\n", auxId, auxName, auxHours, auxSalary);
 		}
 		else
 		{
@@ -191,4 +192,55 @@ int employee_printEmployee(LinkedList* pArrayListEmployee, int index)
 	}
 	return retorno;
 
+}
+
+int changeName(LinkedList* pArrayListEmployee, int index)
+{
+	int retorno = -1;
+	char newName[NAME_LEN];
+	Employee* pEmployee;
+
+	pEmployee = ll_get(pArrayListEmployee, index);
+
+	if(utn_getCadena(newName, NAME_LEN, 2, "Ingrese nuevo nombre: ","Error, nombre invalido.\n") == 0)
+	{
+		employee_setNombre(pEmployee, newName);
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+int changeHours(LinkedList* pArrayListEmployee, int index)
+{
+	int retorno = -1;
+	int newHours;
+	Employee* pEmployee;
+
+	pEmployee = ll_get(pArrayListEmployee, index);
+
+	if(utn_getEntero(&newHours, 2, "Ingrese actualizacion de horas trabajadas: ", "Error, invalido.\n", 0, 100000) == 0)//hasta 100000
+	{
+		employee_setHorasTrabajadas(pEmployee, newHours);
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+int changeSalary(LinkedList* pArrayListEmployee, int index)
+{
+	int retorno = -1;
+	int newSalary;
+	Employee* pEmployee;
+
+	pEmployee = ll_get(pArrayListEmployee, index);
+
+	if(utn_getEntero(&newSalary, 2, "Ingrese nuevo sueldo de 18000 aa 300000: ", "Error, suedo invalido.\n", 18000, 300000) == 0)//hasta 300000
+	{
+		employee_setHorasTrabajadas(pEmployee, newSalary);
+		retorno = 0;
+	}
+
+	return retorno;
 }

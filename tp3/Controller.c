@@ -5,6 +5,8 @@
 #include "parser.h"
 #include "utn.h"
 #include "Controller.h"
+#include "menu.h"
+
 
 #define NAME_LEN 30
 
@@ -145,9 +147,11 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 	int lastId;
 	int retorno = -1;
 	int index;
+	int confirmOut = 0;
 
 	if(pArrayListEmployee != NULL)
 	{
+		//funcion choose employee?
 		controller_ListEmployee(pArrayListEmployee);//listo los empleados
 
 		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
@@ -169,10 +173,57 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 				//mostrar el empleado
 				printf("\n ID    Nombre   Horas Trabajadas   Sueldo\n\n");
 				employee_printEmployee(pArrayListEmployee, index);//imprimo el empleado elegido
-				//menu editar
-			}
-		}
-	}
+
+				do
+				{
+					switch(menuEdit())
+					{
+						case 1:
+							//nombre
+							if(changeName(pArrayListEmployee, index) == 0)
+							{
+								printf("Nombre modificado con exito.\n");
+								employee_printEmployee(pArrayListEmployee, index);
+							}
+							else
+							{
+								printf("Error.\n");
+							}
+							break;
+						case 2:
+							//horas
+							if(changeHours(pArrayListEmployee, index) == 0)
+							{
+								printf("Horas trabajadas actualizadas con exito.\n");
+								employee_printEmployee(pArrayListEmployee, index);
+							}
+							else
+							{
+								printf("Error.\n");
+							}
+							break;
+						case 3:
+							//Sueldo
+							if(changeSalary(pArrayListEmployee, index) == 0)
+							{
+								printf("Sueldo modificado con exito.\n");
+								employee_printEmployee(pArrayListEmployee, index);
+							}
+							else
+							{
+								printf("Error.\n");
+							}
+							break;
+						case 4:
+							confirmOut = 1;
+							break;
+
+					}//switch
+
+				}while(confirmOut == 0);
+			}//if index
+		}//if utn
+	}//if null
 	return retorno;
 }
 
@@ -250,7 +301,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 
 	if(pArrayListEmployee != NULL)
 	{
-		printf("\n ID    Nombre   Horas Trabajadas   Sueldo\n\n");
+		printf("\n    ID       Nombre     Horas Trabajadas  Sueldo\n\n");
 		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
 		{
 

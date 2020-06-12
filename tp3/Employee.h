@@ -30,4 +30,9 @@ int employee_getSueldo(Employee* this,int* sueldo);
 int employee_SearchForId(LinkedList* pArrayListEmployee, int id);
 int employee_printEmployee(LinkedList* pArrayListEmployee, int index);
 
+//Editar:
+int changeName(LinkedList* pArrayListEmployee, int index);
+int changeHours(LinkedList* pArrayListEmployee, int index);
+int changeSalary(LinkedList* pArrayListEmployee, int index);
+
 #endif // employee_H_INCLUDED
