@@ -117,6 +117,7 @@ int main()
             	if(confirm == 'y')
             	{
             		exitOut = 'y';
+            		ll_deleteLinkedList(listaEmpleados);
             	}
             	break;
         }

@@ -31,7 +31,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 		nextId = parser_EmployeeFromText(pFile, pArrayListEmployee);
 		if(nextId >= 0)//porque devuelve el prox id si la ejecucion es exitosa
 		{
-			retorno = nextId; //exito
+			retorno = nextId; //retorna el proximo id como exito
 			printf("Archivo de texto cargado con exito\n");
 		}
 		else
@@ -96,17 +96,19 @@ int controller_addEmployee(char* path , LinkedList* pArrayListEmployee)
 	int auxSalary;
 	int nextId;
 	Employee* pEmployee = employee_new();//malloc
+	//int auxId;
+	//int lastId;
 
 	if(pArrayListEmployee != NULL && pEmployee != NULL)
 	{
 		if(!utn_getCadena(auxName, NAME_LEN, 2, "Ingrese nombre: ", "Error, nombre invalido") &&
-		   !utn_getEntero(&auxHours, 2, "Ingrese cantidad de horas trabajadas: ", "Error, antidad invalida\n", 0, 100000) &&
+		   !utn_getEntero(&auxHours, 2, "Ingrese cantidad de horas trabajadas: ", "Error, cantidad invalida\n", 0, 100000) &&
 		   !utn_getEntero(&auxSalary, 2, "Ingrese salario de 18000 a 30000: ", "Error, salario invalido\n", 18000, 300000))
 		{
 			normalizeStr(auxName);//normalizo nombre
-			//leo el archivo
+
 			nextId = controller_loadFromText(path, pArrayListEmployee);//me devuelve (si todo esta bien) el id mas alto
-			if(nextId >= 0)
+			if(nextId >= 1)//innecesario
 			{
 				nextId += 1;//porque el proximo es el mas alto + 1
 
@@ -302,34 +304,9 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 	if(pArrayListEmployee != NULL)
 	{
 		printf("\n    ID       Nombre     Horas Trabajadas  Sueldo\n\n");
-		for(int i = 1; i < ll_len(pArrayListEmployee); i++)//desde 1 para que no me imprima el encabezado en 0
+		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
 		{
-
-			//if(i == 0)
-			//{
-				//muestra titulos
-
-			//}
-			//else
-			//{
-				employee_printEmployee(pArrayListEmployee, i);
-			//}
-
-			/*
-			pEmployee = ll_get(pArrayListEmployee, i);//traigo un puntero a empleado de la lista
-			if(employee_getId(pEmployee, &auxId) == 0 &&
-			   employee_getNombre(pEmployee, auxName) == 0&&
-			   employee_getHorasTrabajadas(pEmployee, &auxHours) == 0 &&
-			   employee_getSueldo(pEmployee, &auxSalary) == 0)
-			{
-				printf("%10d    %10s    %10d    %10d\n", auxId, auxName, auxHours, auxSalary);
-			}
-			else
-			{
-				printf("Error\n");
-			}
-			*/
-
+			employee_printEmployee(pArrayListEmployee, i);
 		}
 	}
 	else
