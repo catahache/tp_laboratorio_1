@@ -302,10 +302,19 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 	if(pArrayListEmployee != NULL)
 	{
 		printf("\n    ID       Nombre     Horas Trabajadas  Sueldo\n\n");
-		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
+		for(int i = 1; i < ll_len(pArrayListEmployee); i++)//desde 1 para que no me imprima el encabezado en 0
 		{
 
-			employee_printEmployee(pArrayListEmployee, i);
+			//if(i == 0)
+			//{
+				//muestra titulos
+
+			//}
+			//else
+			//{
+				employee_printEmployee(pArrayListEmployee, i);
+			//}
+
 			/*
 			pEmployee = ll_get(pArrayListEmployee, i);//traigo un puntero a empleado de la lista
 			if(employee_getId(pEmployee, &auxId) == 0 &&
@@ -367,7 +376,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 		if(pFile != NULL)
 		{
 			retorno = 0;
-			for(int i = 0; i < ll_len(pArrayListEmployee); i++)//por cada elemento del array lo escribo en el archivo
+			for(int i = 1; i < ll_len(pArrayListEmployee); i++)//por cada elemento del array lo escribo en el archivo, desde la pos 1
 			{
 				pEmployee = ll_get(pArrayListEmployee, i);
 				//utilizo los getter para traerme la info
@@ -404,7 +413,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 	{
 		pFile = fopen(path, "wb");
 
-		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
+		for(int i = 1; i < ll_len(pArrayListEmployee); i++)//desde la pos 1
 		{
 			pEmployee = (Employee*) ll_get(pArrayListEmployee, i);
 			fwrite(pEmployee, sizeof(Employee), 1, pFile);

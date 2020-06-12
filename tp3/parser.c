@@ -19,37 +19,46 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 	char horasTrabajadas[200];
 	char sueldo[200];
 	int nextId = 0;
-	//int firstLine = 1;
+	int firstLine = 1;
 
 	if(pFile != NULL && pArrayListEmployee != NULL)
 	{
 		//PARSER para llenar todo el array de punteros con el archivo de texto
 		do
 		{
-			if(fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", id, nombre, horasTrabajadas, sueldo) == 4)
+			if(firstLine)
 			{
-				//imprime mientras fscanf devuelva 4
-				//printf("%s - %s - %s\n", a, b, c);
-				pEmployee = employee_newParametros(id, nombre, horasTrabajadas, sueldo);
-
-				if(pEmployee != NULL)//osea si pudo cargar
-				{
-					//?
-					//pArrayListEmployee[index] = pEmployee;
-					//index++;
-					ll_add(pArrayListEmployee, pEmployee);
-
-					if(atoi(id) > nextId)
-					{
-						nextId = atoi(id);
-					}
-					//retorno = 0;//exito
-				}
+				firstLine = 0;
+				//no lo cargo
 			}
 			else
 			{
-				break;//salgo de do while
+				if(fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", id, nombre, horasTrabajadas, sueldo) == 4)
+				{
+					//imprime mientras fscanf devuelva 4
+					//printf("%s - %s - %s\n", a, b, c);
+					pEmployee = employee_newParametros(id, nombre, horasTrabajadas, sueldo);
+
+					if(pEmployee != NULL)//osea si pudo cargar
+					{
+						//?
+						//pArrayListEmployee[index] = pEmployee;
+						//index++;
+						ll_add(pArrayListEmployee, pEmployee);
+
+						if(atoi(id) > nextId)
+						{
+							nextId = atoi(id);
+						}
+						//retorno = 0;//exito
+					}
+				}
+				else
+				{
+					break;//salgo de do while
+				}
 			}
+
 
 		}while(feof(pFile) == 0); //lee todo el archivo
 		retorno = nextId;//retorno el nextId como exito.
