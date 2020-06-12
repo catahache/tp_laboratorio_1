@@ -112,6 +112,7 @@ int main()
             	break;
             case 10:
             	printf("Confirma salir? y/n ");
+            	fpurge(stdin);
             	scanf("%c", &confirm);
             	if(confirm == 'y')
             	{

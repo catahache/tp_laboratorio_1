@@ -19,7 +19,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 	char horasTrabajadas[200];
 	char sueldo[200];
 	int nextId = 0;
-	//int index = 0;
+	//int firstLine = 1;
 
 	if(pFile != NULL && pArrayListEmployee != NULL)
 	{

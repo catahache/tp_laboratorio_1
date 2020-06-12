@@ -204,6 +204,7 @@ int changeName(LinkedList* pArrayListEmployee, int index)
 
 	if(utn_getCadena(newName, NAME_LEN, 2, "Ingrese nuevo nombre: ","Error, nombre invalido.\n") == 0)
 	{
+		normalizeStr(newName);
 		employee_setNombre(pEmployee, newName);
 		retorno = 0;
 	}

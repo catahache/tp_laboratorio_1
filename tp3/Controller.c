@@ -171,7 +171,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 			if(index > -1)
 			{
 				//mostrar el empleado
-				printf("\n ID    Nombre   Horas Trabajadas   Sueldo\n\n");
+				printf("\n    ID       Nombre     Horas Trabajadas  Sueldo\n\n");
 				employee_printEmployee(pArrayListEmployee, index);//imprimo el empleado elegido
 
 				do
