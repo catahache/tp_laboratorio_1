@@ -144,6 +144,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 	int auxId;
 	int lastId;
 	int retorno = -1;
+	int index;
 
 	if(pArrayListEmployee != NULL)
 	{
@@ -160,14 +161,16 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 			}
 		}
 
-		if(!utn_getEntero(&auxId, 2, "Ingrese ID de empleado a eliminar del sistema.\n", "Error, ID invalido", 0, lastId))
+		if(!utn_getEntero(&auxId, 2, "Ingrese ID de empleado a modificar.\n", "Error, ID invalido", 0, lastId))
 		{
-			//index = employee_SearchForId(pArrayListEmployee, auxId);
-			//if(index > -1)
-			//{
-
-				//modificar
-			//}
+			index = employee_SearchForId(pArrayListEmployee, auxId);
+			if(index > -1)
+			{
+				//mostrar el empleado
+				printf("\n ID    Nombre   Horas Trabajadas   Sueldo\n\n");
+				employee_printEmployee(pArrayListEmployee, index);//imprimo el empleado elegido
+				//menu editar
+			}
 		}
 	}
 	return retorno;
@@ -238,11 +241,11 @@ int controller_removeEmployee( LinkedList* pArrayListEmployee)
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
 	int retorno = -1;
-	int auxId;
-	char auxName[NAME_LEN];
-	int auxHours;
-	int auxSalary;
-	Employee* pEmployee;
+	//int auxId;
+	//char auxName[NAME_LEN];
+	//int auxHours;
+	//int auxSalary;
+	//Employee* pEmployee;
 
 
 	if(pArrayListEmployee != NULL)
@@ -250,11 +253,14 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 		printf("\n ID    Nombre   Horas Trabajadas   Sueldo\n\n");
 		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
 		{
+
+			employee_printEmployee(pArrayListEmployee, i);
+			/*
 			pEmployee = ll_get(pArrayListEmployee, i);//traigo un puntero a empleado de la lista
-			if(!employee_getId(pEmployee, &auxId) &&
-			   !employee_getNombre(pEmployee, auxName) &&
-			   !employee_getHorasTrabajadas(pEmployee, &auxHours) &&
-			   !employee_getSueldo(pEmployee, &auxSalary))
+			if(employee_getId(pEmployee, &auxId) == 0 &&
+			   employee_getNombre(pEmployee, auxName) == 0&&
+			   employee_getHorasTrabajadas(pEmployee, &auxHours) == 0 &&
+			   employee_getSueldo(pEmployee, &auxSalary) == 0)
 			{
 				printf("%10d    %10s    %10d    %10d\n", auxId, auxName, auxHours, auxSalary);
 			}
@@ -262,6 +268,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 			{
 				printf("Error\n");
 			}
+			*/
 
 		}
 	}

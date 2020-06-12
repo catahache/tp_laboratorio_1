@@ -176,10 +176,10 @@ int employee_printEmployee(LinkedList* pArrayListEmployee, int index)
 	if(pArrayListEmployee != NULL && index >= 0)
 	{
 		pEmployee = ll_get(pArrayListEmployee, index);
-		if(!employee_getId(pEmployee, &auxId) &&
-		   !employee_getNombre(pEmployee, auxName) &&
-		   !employee_getHorasTrabajadas(pEmployee, &auxHours) &&
-		   !employee_getSueldo(pEmployee, &auxSalary))
+		if(employee_getId(pEmployee, &auxId) == 0 &&
+		   employee_getNombre(pEmployee, auxName) ==0 &&
+		   employee_getHorasTrabajadas(pEmployee, &auxHours) == 0 &&
+		   employee_getSueldo(pEmployee, &auxSalary) == 0)
 		{
 			printf("%10d    %10s    %10d    %10d\n", auxId, auxName, auxHours, auxSalary);
 		}
