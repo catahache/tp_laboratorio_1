@@ -18,6 +18,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 	FILE* pFile;
 	pFile = fopen(path, "r");
 
+
 	if(pFile != NULL)
 	{
 		if(parser_EmployeeFromText(pFile, pArrayListEmployee) == 0)
