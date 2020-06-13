@@ -37,7 +37,7 @@ int main()
         switch(menu())
         {
             case 1:
-            	if(flagBin != 1)//si no fue cargado como binario
+            	if(flagBin != 1 && flagText == 0)//si no fue cargado como binario
             	{
             		if(controller_loadFromText("data.csv",listaEmpleados) == 0)
 					{
@@ -46,21 +46,20 @@ int main()
             	}
             	else
 				{
-					printf("El archivo ya fue cargado como Binario.\n");
+					printf("El archivo ya fue cargado.\n");
 				}
                 break;
             case 2:
-            	if(flagText != 1)//si no fue cargado como texto
+            	if(flagText != 1 && flagBin == 0)//si no fue cargado como texto
             	{
             		if(!controller_loadFromBinary("data.bin", listaEmpleados))
             		{
             			flagBin = 1; //se cargo como binario
             		}
-
             	}
             	else
             	{
-            		printf("El archivo ya fue cargado como Texto.\n");
+            		printf("El archivo ya fue cargado.\n");
             	}
             	break;
             case 3:
@@ -135,7 +134,7 @@ int main()
 				}
             	break;
             case 10:
-            	printf("Confirma salir? y/n ");
+            	printf("Confirma salir? y/n: ");
             	fpurge(stdin);
             	scanf("%c", &confirm);
             	if(confirm == 'y')

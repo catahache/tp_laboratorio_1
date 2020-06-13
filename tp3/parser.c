@@ -71,7 +71,6 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 			if(fread(pEmployee, sizeof(Employee), 1, pFile) == 1) //leo datos binarios y valido si me leyo 1
 			{
 				ll_add(pArrayListEmployee, pEmployee);
-				printf("Aniadido con exito\n");
 				retorno = 0;//exito
 			}
 		}while(!feof(pFile));//mientras no sea el final del archivo

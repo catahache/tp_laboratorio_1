@@ -398,6 +398,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 			pEmployee = (Employee*) ll_get(pArrayListEmployee, i);
 			fwrite(pEmployee, sizeof(Employee), 1, pFile);
 		}
+		printf("Archivo guardado!\n");
 		fclose(pFile);
 		retorno = 0;//exito
 	}
