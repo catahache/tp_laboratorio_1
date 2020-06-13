@@ -44,7 +44,7 @@ int menuEdit()
 	printf("  1. Nombre\n");
 	printf("  2. Horas trabajadas\n");
 	printf("  3. Sueldo\n");
-	printf("  4. SALIR\n\n");
+	printf("  4. Salir\n\n");
 
 	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 4);
 
