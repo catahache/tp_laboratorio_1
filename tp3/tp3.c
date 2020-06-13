@@ -150,18 +150,3 @@ int main()
     return 0;
 }
 
-//validar
-/*
- *
-		if(flag==1){ // en 1 esta abierto y en 0 cerrado.
-			printf("\n    [ERROR 0011]: Archivo abierto, primero guardelo.\n");
-		}else{
-			if (!controller_loadFromBinary("data.bin", arrayEmployees)) {
-				printf("\n    [ERROR 0100]: Archivo no cargado.\n");
-			} else if(flag==0){
-				printf("\n    Se cargo el archivo con exito.\n");
-				flag = 1;
-			}
-		}
- */
-
