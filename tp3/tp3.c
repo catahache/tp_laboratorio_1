@@ -3,6 +3,8 @@
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
+#include "menu.h"
+#include "utn.h"
 
 /****************************************************
     Menu:
@@ -22,7 +24,6 @@
 
 int main()
 {
-    int option = 0;
     char confirm = 'n';
     char exitOut = 'n';
     int flagText = 0;
@@ -32,7 +33,8 @@ int main()
     LinkedList* listaEmpleados = ll_newLinkedList();
 
     do{
-        switch(option)
+    	system("clear");
+        switch(menu())
         {
             case 1:
             	if(flagBin != 1)//si no fue cargado como binario
@@ -62,7 +64,6 @@ int main()
             	}
             	break;
             case 3:
-            	//validar que no entre si no entro al primer case (ahi ya leeria el archivo)
             	if(flagText == 1 || flagBin == 1)
             	{
             		controller_addEmployee("data.csv", listaEmpleados);
@@ -121,9 +122,8 @@ int main()
             	}
             	break;
         }
+        pause();
 
-        printf("Ingrese opcion: ");
-        scanf("%d", &option);
     }while(exitOut == 'n');
     return 0;
 }

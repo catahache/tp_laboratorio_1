@@ -36,13 +36,13 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 		}
 		else
 		{
-			printf("Error\n");
+			printf("Error id\n");
 		}
 		fclose(pFile);
 	}
 	else
 	{
-		printf("Error\n");
+		printf("Error null\n");
 	}
     return retorno;
 }
