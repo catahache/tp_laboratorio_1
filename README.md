@@ -7,5 +7,5 @@ Testear desde la consola de `_Eclipse_` o desde la `_terminal_` abriendo la apli
 El `warning`:   
 > ld: warning: object file (/Users/catalina/git/tp_laboratorio_1/tp3/LinkedList.a(LinkedList.o)) was built for newer OSX version (10.15) than being linked (10.13)  
 
-tiene que ver con mi version de mac (10.14)
+tiene que ver con mi version de macOS (10.14)
 
