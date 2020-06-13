@@ -76,7 +76,7 @@ int employee_setNombre(Employee* this,char* nombre)
 
 	if(this != NULL && nombre != NULL)
 	{
-		if(isValidName(nombre, NAME_LEN))//verifico que este bien con isValidName de utn.h
+		if(isValidName(nombre, NAME_LEN))//verifico que este bien con isValidName de utn.h (osea que de 1)
 		{
 			strncpy(this->nombre, nombre, NAME_LEN);
 			retorno = 0;//exito
