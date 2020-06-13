@@ -32,6 +32,8 @@ int strLwr(char* str);
 
 int normalizeStr(char* str);
 
+//int isCuit(char str[]);
+
 //estaticas
 int isValidName(char* cadena, int longitud);
 int isNumeric(char* cadena, int longitud);

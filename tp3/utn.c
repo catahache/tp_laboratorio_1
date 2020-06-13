@@ -11,7 +11,7 @@
 #include <ctype.h>
 #include "utn.h"
 
-int isCuit(char str[]);
+
 
 //////////////////////// U T N    F U N C T I O N S /////////////////////////////
 
