@@ -7,8 +7,6 @@
 #include "Controller.h"
 #include "menu.h"
 
-
-
 #define NAME_LEN 30
 
 
