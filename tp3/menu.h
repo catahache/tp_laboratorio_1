@@ -8,8 +8,22 @@
 #ifndef MENU_H_
 #define MENU_H_
 
+/*
+ * \brief Menu principal
+ * \return Retorna la opcion elegida
+ */
 int menu();
+
+/*
+ * \brief Menu de edicion
+ * \return Retorna la opcion elegida
+ */
 int menuEdit();
+
+/*
+ * \brief Menu de ordenamiento
+ * \return Retorna la opcion elegida
+ */
 int menuSort();
 
 

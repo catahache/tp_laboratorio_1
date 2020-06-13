@@ -275,6 +275,7 @@ int normalizeStr(char* str)
 	return isOk;
 }
 
+/*
 int isCuit(char str[])
 {
 	int isOk = -1;
@@ -291,6 +292,7 @@ int isCuit(char str[])
 	   return isOk;
 
 }
+*/
 
 int isValidName(char* cadena, int longitud)
 {

@@ -6,17 +6,7 @@
 #include "menu.h"
 #include "Controller.h"
 
-
-
 #define NAME_LEN 30
-
-
-/*
-  	int id;
-	char nombre[128];
-	int horasTrabajadas;
-	int sueldo;
-*/
 
 
 Employee* employee_new()
@@ -31,7 +21,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 
 	if(this != NULL && idStr != NULL && nombreStr != NULL && horasTrabajadasStr != NULL)
 	{
-		//si estas estan mal(-1), no tiene que existir el empleado, por eso llamo a delete
+		//si estas dan error(-1), no tiene que existir el empleado, por eso llamo a delete
 		if(employee_setId(this, atoi(idStr)) == -1 ||
 		   employee_setNombre(this, nombreStr) == -1 ||
 		   employee_setHorasTrabajadas(this, atoi(horasTrabajadasStr)) == -1 ||
