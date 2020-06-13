@@ -3,6 +3,10 @@
 #include <string.h>
 #include "Employee.h"
 #include "utn.h"
+#include "menu.h"
+#include "Controller.h"
+
+
 
 #define NAME_LEN 30
 
@@ -270,4 +274,138 @@ int employee_lastId(LinkedList* pArrayListEmployee)
 		}
 	}
 	return lastId;
+}
+
+
+int employee_sort(LinkedList* pArrayListEmployee)
+{
+	int retorno = -1;
+	int orden;
+
+	if(pArrayListEmployee != NULL)
+	{
+		switch(menuSort())
+		{
+			case 1:
+				//Id
+				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
+				printf("Espere unos segundos, por favor.\n");
+				ll_sort(pArrayListEmployee, employee_sortById, orden);
+				controller_ListEmployee(pArrayListEmployee);
+				break;
+			case 2:
+				//Nombre
+				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
+				printf("Espere unos segundos, por favor.\n");
+				ll_sort(pArrayListEmployee, employee_sortByName, orden);
+				controller_ListEmployee(pArrayListEmployee);
+				break;
+			case 3:
+				//Horas
+				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
+				printf("Espere unos segundos, por favor.\n");
+				ll_sort(pArrayListEmployee, employee_sortByHours, orden);
+				controller_ListEmployee(pArrayListEmployee);
+				break;
+			case 4:
+				//Sueldo
+				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
+				printf("Espere unos segundos, por favor.\n");
+				ll_sort(pArrayListEmployee, employee_sortBySalary, orden);
+				controller_ListEmployee(pArrayListEmployee);
+				break;
+			case 5:
+				break;
+			default:
+				printf("No es una opcion valida\n");
+				break;
+		}
+	}
+
+	return retorno;
+
+}
+
+int employee_sortById(void* firstEmployee, void* secondEmployee)
+{
+	int retorno = 0;//si son iguales
+	int firstId;
+	int secondId;
+
+	employee_getId(firstEmployee, &firstId);
+	employee_getId(secondEmployee, &secondId);
+
+	if(firstId > secondId)
+	{
+		retorno = 1;
+	}
+	else if(firstId > secondId)
+	{
+		retorno = -1;
+	}
+
+	return retorno;
+}
+
+int employee_sortByName(void* firstEmployee, void* secondEmployee)
+{
+	int retorno = 0;//si son iguales
+	char firstName[NAME_LEN];
+	char secondName[NAME_LEN];
+
+	employee_getNombre(firstEmployee, firstName);
+	employee_getNombre(secondEmployee, secondName);
+
+	if(strcmp(firstName, secondName) > 0)//el primero es mayor
+	{
+		retorno = 1;
+	}
+	else if(strcmp(firstName, secondName) < 0)// el primero es menor
+	{
+		retorno = -1;
+	}
+
+	return retorno;
+}
+
+int employee_sortByHours(void* firstEmployee, void* secondEmployee)
+{
+	int retorno = 0;//si son iguales
+	int firstHours;
+	int secondHours;
+
+	employee_getHorasTrabajadas(firstEmployee, &firstHours);
+	employee_getHorasTrabajadas(secondEmployee, &secondHours);
+
+	if(firstHours > secondHours)
+	{
+		retorno = 1;
+	}
+	else if(firstHours > secondHours)
+	{
+		retorno = -1;
+	}
+
+	return retorno;
+}
+
+int employee_sortBySalary(void* firstEmployee, void* secondEmployee)
+{
+	int retorno = 0;//si son iguales
+	int firstSalary;
+	int secondSalary;
+
+	employee_getSueldo(firstEmployee, &firstSalary);
+	employee_getSueldo(secondEmployee, &secondSalary);
+
+	if(firstSalary > secondSalary)
+	{
+		retorno = 1;
+	}
+	else if(firstSalary > secondSalary)
+	{
+		retorno = -1;
+	}
+
+	return retorno;
 }

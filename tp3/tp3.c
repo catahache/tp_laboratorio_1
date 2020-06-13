@@ -66,7 +66,7 @@ int main()
             case 3:
             	if(flagText == 1 || flagBin == 1)
             	{
-            		controller_addEmployee("data.csv", listaEmpleados);
+            		controller_addEmployee(listaEmpleados);
             	}
             	else
             	{
@@ -104,6 +104,15 @@ int main()
 				}
             	break;
             case 7:
+            	if(flagText == 1 || flagBin == 1)
+				{
+					controller_sortEmployee(listaEmpleados);
+				}
+				else
+				{
+					printf("Error. Aun no se cargo ningun archivo.\n");
+				}
+				break;
             	break;
             case 8:
             	if(flagText == 1 || flagBin == 1)
@@ -141,3 +150,19 @@ int main()
     }while(exitOut == 'n');
     return 0;
 }
+
+//validar
+/*
+ *
+		if(flag==1){ // en 1 esta abierto y en 0 cerrado.
+			printf("\n    [ERROR 0011]: Archivo abierto, primero guardelo.\n");
+		}else{
+			if (!controller_loadFromBinary("data.bin", arrayEmployees)) {
+				printf("\n    [ERROR 0100]: Archivo no cargado.\n");
+			} else if(flag==0){
+				printf("\n    Se cargo el archivo con exito.\n");
+				flag = 1;
+			}
+		}
+ */
+

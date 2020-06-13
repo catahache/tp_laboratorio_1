@@ -37,4 +37,11 @@ int changeSalary(LinkedList* pArrayListEmployee, int index);
 
 int employee_lastId(LinkedList* pArrayListEmployee);
 
+int employee_sort(LinkedList* pArrayListEmployee);
+int employee_sortById(void* firstEmployee, void* secondEmployee);
+int employee_sortByName(void* firstEmployee, void* secondEmployee);
+int employee_sortByHours(void* firstEmployee, void* secondEmployee);
+int employee_sortBySalary(void* firstEmployee, void* secondEmployee);
+
+
 #endif // employee_H_INCLUDED

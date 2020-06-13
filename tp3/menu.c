@@ -50,3 +50,24 @@ int menuEdit()
 
 	return option;
 }
+
+//sortMenu()
+
+int menuSort()
+{
+	int option;
+
+	system("clear");
+
+	printf("***** O R D E N A R *****\n\n");
+	printf("  1. Por ID\n");
+	printf("  2. Por Nombre\n");
+	printf("  3. Por Horas trabajadas\n");
+	printf("  4. Por Sueldo\n\n");
+	printf("  5. Salir\n\n");
+
+	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 5);
+
+	return option;
+
+}

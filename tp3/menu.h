@@ -10,6 +10,7 @@
 
 int menu();
 int menuEdit();
+int menuSort();
 
 
 #endif /* MENU_H_ */
