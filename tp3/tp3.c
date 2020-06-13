@@ -39,7 +39,7 @@ int main()
             case 1:
             	if(flagBin != 1)//si no fue cargado como binario
             	{
-            		if(controller_loadFromText("data.csv",listaEmpleados) > -1)
+            		if(controller_loadFromText("data.csv",listaEmpleados) == 0)
 					{
 						flagText = 1; //se cargo como texto
 					}
@@ -106,10 +106,24 @@ int main()
             case 7:
             	break;
             case 8:
-            	controller_saveAsText("data.csv", listaEmpleados);
+            	if(flagText == 1 || flagBin == 1)
+            	{
+            		controller_saveAsText("data.csv", listaEmpleados);
+            	}
+            	else
+				{
+					printf("Error. Aun no se cargo ningun archivo.\n");
+				}
             	break;
             case 9:
-            	controller_saveAsBinary("data.bin", listaEmpleados);
+            	if(flagText == 1 || flagBin == 1)
+            	{
+            		controller_saveAsBinary("data.bin", listaEmpleados);
+            	}
+            	else
+				{
+					printf("Error. Aun no se cargo ningun archivo.\n");
+				}
             	break;
             case 10:
             	printf("Confirma salir? y/n ");

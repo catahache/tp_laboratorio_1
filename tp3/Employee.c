@@ -46,6 +46,7 @@ int employee_delete(Employee* this)
 	if(this != NULL)
 	{
 		free(this);
+		this = NULL;
 		retorno = 0;//exito
 	}
 	return retorno;
@@ -244,4 +245,29 @@ int changeSalary(LinkedList* pArrayListEmployee, int index)
 	}
 
 	return retorno;
+}
+
+int employee_lastId(LinkedList* pArrayListEmployee)
+{
+	Employee* pEmployee;
+	int len = ll_len(pArrayListEmployee);
+	int auxId;
+	int lastId = 0;
+	int flag = 0;
+
+	if(pArrayListEmployee != NULL)
+	{
+		for(int i = 0; i < len; i++)
+		{
+			pEmployee = (Employee*) ll_get(pArrayListEmployee,i);
+			employee_getId(pEmployee, &auxId);
+
+			if(auxId > lastId || flag == 0)
+			{
+				lastId = auxId;
+				flag = 1;
+			}
+		}
+	}
+	return lastId;
 }

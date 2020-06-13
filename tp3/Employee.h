@@ -35,4 +35,6 @@ int changeName(LinkedList* pArrayListEmployee, int index);
 int changeHours(LinkedList* pArrayListEmployee, int index);
 int changeSalary(LinkedList* pArrayListEmployee, int index);
 
+int employee_lastId(LinkedList* pArrayListEmployee);
+
 #endif // employee_H_INCLUDED

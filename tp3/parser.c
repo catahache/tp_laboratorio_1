@@ -19,46 +19,28 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 	char horasTrabajadas[200];
 	char sueldo[200];
 	int nextId = 0;
-	int firstLine = 1;
 
 	if(pFile != NULL && pArrayListEmployee != NULL)
 	{
-		//PARSER para llenar todo el array de punteros con el archivo de texto
+		fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", id, nombre, horasTrabajadas, sueldo);
 		do
 		{
-			if(firstLine)
+			if(fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", id, nombre, horasTrabajadas, sueldo) == 4)
 			{
-				firstLine = 0;
-				//no lo cargo
+				//imprime mientras fscanf devuelva 4
+				//printf("%s - %s - %s\n", a, b, c);
+				pEmployee = employee_newParametros(id, nombre, horasTrabajadas, sueldo);
+
+				if(pEmployee != NULL)//osea si pudo cargar
+				{
+					ll_add(pArrayListEmployee, pEmployee);
+					retorno = 0;//exito
+				}
 			}
 			else
 			{
-				if(fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", id, nombre, horasTrabajadas, sueldo) == 4)
-				{
-					//imprime mientras fscanf devuelva 4
-					//printf("%s - %s - %s\n", a, b, c);
-					pEmployee = employee_newParametros(id, nombre, horasTrabajadas, sueldo);
-
-					if(pEmployee != NULL)//osea si pudo cargar
-					{
-						//?
-						//pArrayListEmployee[index] = pEmployee;
-						//index++;
-						ll_add(pArrayListEmployee, pEmployee);
-
-						if(atoi(id) > nextId)
-						{
-							nextId = atoi(id);
-						}
-						//retorno = 0;//exito
-					}
-				}
-				else
-				{
-					break;//salgo de do while
-				}
+				break;//salgo de do while
 			}
-
 
 		}while(feof(pFile) == 0); //lee todo el archivo
 		retorno = nextId;//retorno el nextId como exito.
@@ -84,6 +66,8 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 		do
 		{
 			pEmployee = employee_new(); //reservo lugar para un empleado
+			//lectura fantasma
+			//fread(pEmployee, sizeof(Employee), 1, pFile);//primera linea
 			if(fread(pEmployee, sizeof(Employee), 1, pFile) == 1) //leo datos binarios y valido si me leyo 1
 			{
 				ll_add(pArrayListEmployee, pEmployee);

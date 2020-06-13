@@ -21,29 +21,28 @@
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
 	int retorno = -1;
-	int nextId;
+	//int nextId;
 	FILE* pFile;
 
 	pFile = fopen(path, "r");
 
 	if(pFile != NULL)
 	{
-		nextId = parser_EmployeeFromText(pFile, pArrayListEmployee);
-		if(nextId >= 0)//porque devuelve el prox id si la ejecucion es exitosa
+		if(parser_EmployeeFromText(pFile, pArrayListEmployee) == 0)
 		{
-			retorno = nextId; //retorna el proximo id como exito
 			printf("Archivo de texto cargado con exito\n");
+			retorno = 0;
 		}
 		else
 		{
 			printf("Error id\n");
 		}
-		fclose(pFile);
 	}
 	else
 	{
 		printf("Error null\n");
 	}
+	fclose(pFile);
     return retorno;
 }
 
@@ -81,6 +80,8 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     return retorno;
 }
 
+
+
 /** \brief Alta de empleados
  *
  * \param path char*
@@ -97,7 +98,7 @@ int controller_addEmployee(char* path , LinkedList* pArrayListEmployee)
 	int nextId;
 	Employee* pEmployee = employee_new();//malloc
 	//int auxId;
-	//int lastId;
+	//int lastId = 1;
 
 	if(pArrayListEmployee != NULL && pEmployee != NULL)
 	{
@@ -107,10 +108,7 @@ int controller_addEmployee(char* path , LinkedList* pArrayListEmployee)
 		{
 			normalizeStr(auxName);//normalizo nombre
 
-			nextId = controller_loadFromText(path, pArrayListEmployee);//me devuelve (si todo esta bien) el id mas alto
-			if(nextId >= 1)//innecesario
-			{
-				nextId += 1;//porque el proximo es el mas alto + 1
+				nextId = employee_lastId(pArrayListEmployee) + 1;//lo que retorne la funcion + 1
 
 				if(!employee_setId(pEmployee, nextId) &&
 				   !employee_setNombre(pEmployee, auxName) &&
@@ -119,13 +117,13 @@ int controller_addEmployee(char* path , LinkedList* pArrayListEmployee)
 				{
 					ll_add(pArrayListEmployee, pEmployee);
 					printf("Alta exitosa\n");
-					printf("%d", nextId);
+					//printf("%d", nextId);
 				}//if setters
 				else
 				{
 					free(pEmployee);
 				}
-			}//if nextId
+			//}//if nextId
 		}//if utn
 		else
 		{
@@ -240,7 +238,7 @@ int controller_removeEmployee( LinkedList* pArrayListEmployee)
 {
 	int retorno = -1;
 	int auxId;
-	int lastId = 1;
+	int lastId;
 	Employee* pEmployee;
 	int index;
 	char confirmDelete;
@@ -249,22 +247,14 @@ int controller_removeEmployee( LinkedList* pArrayListEmployee)
 	{
 		controller_ListEmployee(pArrayListEmployee);//listo los empleados
 
-		for(int i = 0; i < ll_len(pArrayListEmployee); i++)
-		{
-			pEmployee = ll_get(pArrayListEmployee, i);
-
-			employee_getId(pEmployee, &auxId);
-			if(auxId >= lastId)
-			{
-				lastId = auxId;//el ultimo id va a ser el mas grande
-			}
-		}
+		lastId = employee_lastId(pArrayListEmployee);//me devuelve el id mas alto
 
 		if(!utn_getEntero(&auxId, 2, "Ingrese ID de empleado a eliminar del sistema.\n", "Error, ID invalido", 0, lastId))
 		{
 			index = employee_SearchForId(pArrayListEmployee, auxId);
 			if(index > -1)
 			{
+				pEmployee = ll_get(pArrayListEmployee, index);
 				//mostrar el empleado
 				printf("\n ID    Nombre   Horas Trabajadas   Sueldo\n\n");
 				employee_printEmployee(pArrayListEmployee, index);//imprimo el empleado elegido
@@ -274,9 +264,11 @@ int controller_removeEmployee( LinkedList* pArrayListEmployee)
 				if(confirmDelete == 'y')
 				{
 					ll_remove(pArrayListEmployee, index);//elimino el empleado en ese index
-					employee_delete(pEmployee);//elimino el punt aux que me cree
-					printf("Baja realizada con exito\n");
-					retorno = 0;
+					if(employee_delete(pEmployee) == 0) //elimino el punt aux que me cree
+					{
+						printf("Baja realizada con exito\n");
+						retorno = 0;
+					}
 				}
 			}
 		}

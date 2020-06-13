@@ -1,3 +1,4 @@
+id,nombre,horasTrabajadas,sueldo
 1,Lou,120,10000
 2,Ulrike,180,25000
 3,Brade,325,20000
@@ -386,6 +387,7 @@
 386,Demeter,88,10000
 387,Juliann,90,50000
 388,Shauna,120,25000
+389,Anna-maria,120,42000
 390,Ag,88,50000
 391,Sherwin,88,50000
 392,Vikki,88,33000
@@ -524,6 +526,7 @@
 525,Edan,88,20000
 526,Homer,325,10000
 527,Eveline,325,37000
+528,Helen-elizabeth,220,20000
 529,Daveta,180,20000
 530,Mort,90,42000
 531,Maxi,75,37000
@@ -667,6 +670,7 @@
 669,Beverlee,60,25000
 670,Arlette,220,30000
 671,Jacqueline,90,50000
+672,Sheila-kathryn,90,10000
 673,Lambert,325,42000
 674,Lamont,220,33000
 675,Immanuel,75,33000
@@ -744,6 +748,7 @@
 747,Graehme,90,18000
 748,Mitchael,90,33000
 749,Carola,325,10000
+750,Zsa zsa,180,20000
 751,Jude,180,12000
 752,Arch,180,33000
 753,Andrej,88,50000
@@ -990,6 +995,7 @@
 994,Raquela,180,12000
 995,Maxi,325,18000
 996,Atalanta,90,37000
+997,De witt,88,12000
 998,Jaye,75,25000
-999,Gabriela,90,15000
+999,Tamarra,60,15000
 1000,Saleem,60,20000
