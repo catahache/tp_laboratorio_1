@@ -292,6 +292,7 @@ int employee_sort(LinkedList* pArrayListEmployee)
 				printf("Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListEmployee, employee_sortById, orden);
 				controller_ListEmployee(pArrayListEmployee);
+				retorno = 0;
 				break;
 			case 2:
 				//Nombre
@@ -299,6 +300,7 @@ int employee_sort(LinkedList* pArrayListEmployee)
 				printf("Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListEmployee, employee_sortByName, orden);
 				controller_ListEmployee(pArrayListEmployee);
+				retorno = 0;
 				break;
 			case 3:
 				//Horas
@@ -306,6 +308,7 @@ int employee_sort(LinkedList* pArrayListEmployee)
 				printf("Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListEmployee, employee_sortByHours, orden);
 				controller_ListEmployee(pArrayListEmployee);
+				retorno = 0;
 				break;
 			case 4:
 				//Sueldo
@@ -313,6 +316,7 @@ int employee_sort(LinkedList* pArrayListEmployee)
 				printf("Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListEmployee, employee_sortBySalary, orden);
 				controller_ListEmployee(pArrayListEmployee);
+				retorno = 0;
 				break;
 			case 5:
 				break;
@@ -321,9 +325,7 @@ int employee_sort(LinkedList* pArrayListEmployee)
 				break;
 		}
 	}
-
 	return retorno;
-
 }
 
 int employee_sortById(void* firstEmployee, void* secondEmployee)

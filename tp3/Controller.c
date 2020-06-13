@@ -322,7 +322,10 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 
 	if(pArrayListEmployee != NULL)
 	{
-		employee_sort(pArrayListEmployee);
+		if(employee_sort(pArrayListEmployee) == 0)
+		{
+			printf("Empleados ordenados exitosamente.\n");
+		}
 	}
 	else
 	{
