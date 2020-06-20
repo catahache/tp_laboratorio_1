@@ -25,19 +25,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: TP4_CataHeredia_LinkedList_Mac
+all: TP4_CatalinaHeredia_LinkedList_Mac
 
 # Tool invocations
-TP4_CataHeredia_LinkedList_Mac: $(OBJS) $(USER_OBJS)
+TP4_CatalinaHeredia_LinkedList_Mac: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C Linker'
-	gcc  -o "TP4_CataHeredia_LinkedList_Mac" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc  -o "TP4_CatalinaHeredia_LinkedList_Mac" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) TP4_CataHeredia_LinkedList_Mac
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) TP4_CatalinaHeredia_LinkedList_Mac
 	-@echo ' '
 
 .PHONY: all clean dependents

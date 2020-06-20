@@ -51,9 +51,9 @@ static Node* getNode(LinkedList* this, int nodeIndex)
 		//inicializo mi puntero a nodo y lo igualo al primer nodo de this
 		pNodeAux = this->pFirstNode; //0
 
-		for(int i = 0; i < nodeIndex; i++)
+		for(int i = 0; i < nodeIndex; i++)//itero hasta el indice deseado
 		{
-			pNodeAux = pNodeAux->pNextNode;
+			pNodeAux = pNodeAux->pNextNode;//luego cargo la dir de memo correspondiente al indice deseado
 		}
 	}
     return pNodeAux;
@@ -89,7 +89,6 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     Node* newNode;
     Node* prevNode;
 
-    //si el index es = a 0 que el nuevo nodo.nextNode = this.primernodo
     if(this != NULL && nodeIndex >= 0 && nodeIndex <= ll_len(this))
     {
     	newNode = (Node*) malloc(sizeof(Node));
@@ -105,7 +104,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     	else
     	{
     		prevNode = getNode(this, nodeIndex - 1);//consigo la ubicacion del nodo previo al que creo
-    		newNode->pNextNode = NULL;//prevNode->pNextNode;//el siguiente sera al que apuntaba el ultimo
+    		newNode->pNextNode = prevNode->pNextNode;//el siguiente sera al que apuntaba el ultimo
     		prevNode->pNextNode = newNode;//le paso al nodo previo la dir del nuevo nodo, al que apuntara
     	}
 
@@ -206,7 +205,7 @@ int ll_set(LinkedList* this, int index,void* pElement)
 }
 
 
-/** \brief Elimina un nodo de la lista
+/** \brief Elimina un elemento de la lista
  *
  * \param this LinkedList* Puntero a la lista
  * \param nodeIndex int Ubicacion del elemento a eliminar
@@ -290,7 +289,7 @@ int ll_deleteLinkedList(LinkedList *this)
     return isOk;
 }
 
-/** \brief Busca el indice de la primer ocurrencia del elemento pasado como parametro
+/** \brief Busca el indice de la primera ocurrencia del elemento pasado como parametro
  *
  * \param this LinkedList* Puntero a la lista
  * \param pElement void* Puntero al elemento
@@ -301,12 +300,17 @@ int ll_deleteLinkedList(LinkedList *this)
 int ll_indexOf(LinkedList* this, void* pElement)
 {
     int indexNode = -1;
+    Node* pNodeAux;
 
     if(this != NULL)
     {
     	for(int i = 0; i < ll_len(this); i++)
     	{
-
+    		pNodeAux = getNode(this, i);
+    		if(pNodeAux->pElement == pElement)
+    		{
+    			indexNode = i;
+    		}
     	}
     }
 
@@ -323,9 +327,21 @@ int ll_indexOf(LinkedList* this, void* pElement)
  */
 int ll_isEmpty(LinkedList* this)
 {
-    int returnAux = -1;
+    int isEmpty = -1;
 
-    return returnAux;
+    if(this != NULL)
+    {
+    	if(ll_len(this) == 0)
+    	{
+    		isEmpty = 1;
+    	}
+    	else if (ll_len(this) > 0)
+    	{
+    		isEmpty = 0;
+    	}
+    }
+
+    return isEmpty;
 }
 
 /** \brief Inserta un nuevo elemento en la lista en la posicion indicada
@@ -339,9 +355,14 @@ int ll_isEmpty(LinkedList* this)
  */
 int ll_push(LinkedList* this, int index, void* pElement)
 {
-    int returnAux = -1;
+    int isOk = -1;
 
-    return returnAux;
+    if(this != NULL && index <= ll_len(this) && index >= 0)
+    {
+    	isOk = addNode(this, index, pElement);
+    }
+
+    return isOk;
 }
 
 
@@ -355,23 +376,43 @@ int ll_push(LinkedList* this, int index, void* pElement)
  */
 void* ll_pop(LinkedList* this,int index)
 {
-    void* returnAux = NULL;
+    void* pElement = NULL;
 
-    return returnAux;
+    if(this != NULL && index <= ll_len(this) && index >= 0)
+    {
+    	pElement = ll_get(this, index);
+    	ll_remove(this, index);
+    }
+
+    return pElement;
 }
 
 
+/** \brief Comprueba si existe el elemento que se le pasa como parámetro.
+ *
+ * \param this LinkedList* Puntero a la lista
+ * \param pElement void* Puntero al elemento
+ * \return int Retorna  (-1) Error: si el puntero a la lista es NULL
+                        ( 0) Si no encuentra el elemento
+                        ( 1) Si encuentra el elemento
+ *
+ */
 int ll_contains(LinkedList *this, void *pElement) {
-    int returnAux = -1;
 
-	if (this != NULL) {
-		if (ll_indexOf(this, pElement) != -1) {
-			returnAux = 1;
-		} else {
-			returnAux = 0;
+	int exist = -1;
+
+	if (this != NULL)
+	{
+		if (ll_indexOf(this, pElement) > -1)//si el indice del elemento existe
+		{
+			exist = 1;
+		}
+		else // si no existe
+		{
+			exist = 0;
 		}
 	}
-    return returnAux;
+    return exist;
 }
 
 /** \brief  Determina si todos los elementos de la lista (this2)
@@ -386,6 +427,34 @@ int ll_contains(LinkedList *this, void *pElement) {
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
+    int len = 0;
+
+    void* pElem;
+
+    if(this != NULL & this2 != NULL)
+    {
+    	returnAux = 0;
+    	if(ll_len(this) >= ll_len(this2))
+    	{
+    		for(int i = 0; i < ll_len(this2); i++)
+    		{
+    			pElem = ll_get(this2, i);
+    			if(ll_contains(this, pElem) == 1)//si el elemento de this2 esta en this
+    			{
+    				len++;
+    			}
+    			else
+    			{
+    				break;
+    			}
+    		}
+    	}
+
+    	if(len == ll_len(this2))//si recorrio toda la longitud de this2, significa que todos sus elems estan en this
+    	{
+    		returnAux = 1;
+    	}
+    }
 
     return returnAux;
 }
