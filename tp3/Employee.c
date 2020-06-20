@@ -331,7 +331,7 @@ int employee_sortById(void* firstEmployee, void* secondEmployee)
 	{
 		retorno = 1;
 	}
-	else if(firstId > secondId)
+	else if(firstId < secondId)
 	{
 		retorno = -1;
 	}
@@ -373,7 +373,7 @@ int employee_sortByHours(void* firstEmployee, void* secondEmployee)
 	{
 		retorno = 1;
 	}
-	else if(firstHours > secondHours)
+	else if(firstHours < secondHours)
 	{
 		retorno = -1;
 	}
@@ -394,7 +394,7 @@ int employee_sortBySalary(void* firstEmployee, void* secondEmployee)
 	{
 		retorno = 1;
 	}
-	else if(firstSalary > secondSalary)
+	else if(firstSalary < secondSalary)
 	{
 		retorno = -1;
 	}

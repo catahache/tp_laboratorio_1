@@ -525,9 +525,38 @@ LinkedList* ll_clone(LinkedList* this)
  */
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
-    int returnAux =-1;
+    int isOk = -1;
+    void* pElement1;
+    void* pElement2;
 
-    return returnAux;
+    //recorre node index
+    //if llama func qe compara dos elementos
 
+    for(int i = 0; i < ll_len(this) - 1 ; i++)
+    {
+    	for(int j = i; j < ll_len(this); j++)
+    	{
+    		if(pFunc() == 0)//son iguales
+    		{
+
+    		}
+    		else if (pFunc() == 1)//pElement1 es mas grande que 1Element2
+    		{
+
+    		}
+    		else if (pFunc() == -1)//pElement1 es mas chico que 1Element2
+			{
+
+			}
+
+    		//if
+    		//me guardo el punt a next node del nodo dos
+    		//agarro el nodo dos y le asigno como punt next node el nodo uno
+    		//al nodo 1 le asigno el auxiliar
+
+    	}
+    }
+
+    return isOk;
 }
 
