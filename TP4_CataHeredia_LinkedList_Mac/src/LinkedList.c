@@ -469,25 +469,25 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
                                 o (si el indice to es menor o igual a from o mayor al len de la lista)
                          (puntero a la nueva lista) Si ok
 */
-LinkedList* ll_subList(LinkedList* this,int from,int to) //75%
+LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
     Node* pNode;
+    int indexNode = 0;
 
-    if(this != NULL && from >= 0 && from <= ll_len(this) && to > from && to <= ll_len(this))
+    if(this != NULL && from >= 0 && from <= ll_len(this) && to >= from && to <= ll_len(this))
     {
     	cloneArray = ll_newLinkedList();//pido espacio
 
     	if(cloneArray != NULL)
     	{
-    		for(int i = from; i == to + 1; i++)//recorre hasta que i sea = al indice siguiente al que indica el parametro to
+    		for(int i = from; i < to; i++)
 			{
 				pNode = getNode(this, i);
-				ll_add(cloneArray, pNode);
-
-				if(i == from)
+				if(pNode != NULL)
 				{
-					cloneArray->pFirstNode = pNode;
+					addNode(cloneArray, i, pNode->pElement);
+					indexNode++;
 				}
 			}
     	}
@@ -506,24 +506,10 @@ LinkedList* ll_subList(LinkedList* this,int from,int to) //75%
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
-    Node* pNode;
 
     if(this != NULL)
     {
-    	cloneArray = ll_newLinkedList();//pido espacio
-    	if(cloneArray != NULL)
-    	{
-    		for(int i = 0; i == ll_len(this) + 1; i++)
-    		{
-    			pNode = ll_get(this, i);
-    			ll_add(cloneArray, pNode);
-    			if(i == 0)
-    			{
-    				cloneArray->pFirstNode = pNode;
-    			}
-    		}
-    	}
-
+    	cloneArray = ll_subList(this, 0, ll_len(this));//desde 0 hasta el tamanio de this
     }
 
     return cloneArray;
