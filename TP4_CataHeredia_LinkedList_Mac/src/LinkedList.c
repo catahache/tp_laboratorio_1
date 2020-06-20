@@ -482,7 +482,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to) //75%
     	{
     		for(int i = from; i == to + 1; i++)//recorre hasta que i sea = al indice siguiente al que indica el parametro to
 			{
-				pNode = ll_get(this, i);
+				pNode = getNode(this, i);
 				ll_add(cloneArray, pNode);
 
 				if(i == from)
