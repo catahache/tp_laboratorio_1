@@ -528,26 +528,26 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
     int isOk = -1;
     void* pElement1;
     void* pElement2;
-    void* pElementAux;
 
-    if(this != NULL && (order == 0 || order == 1))
+    if(this != NULL && pFunc != NULL && (order == 0 || order == 1) )
 	{
-    	for(int i = 0; i < ll_len(this) - 1 ; i++)
-		{
-			pElement1 = ll_get(this, i);
-			for(int j = i + 1; j < ll_len(this); j++)
+    		for(int i = 0; i < ll_len(this) - 1 ; i++)
 			{
-				pElement2 = ll_get(this, j);
-
-				//1. si el primer elemento es mas grande que el segundo, y el orden es ascendente, swapeo
-				//2. si el primer elemento es mas chico que el segundo, y el orden es descendente, swapeo
-				if((pFunc(pElement1, pElement2) > 0 && order == 1) || (pFunc(pElement1, pElement2) < 0 && order == 0))
+				for(int j = i + 1; j < ll_len(this); j++)
 				{
-					ll_set(this, i, pElement2); //copio el elemento 2 en el lugar del 1
-					ll_set(this, j, pElement1); //copio el elemento 1 en el lugar del 2
+					pElement1 = ll_get(this, i);
+					pElement2 = ll_get(this, j);
+
+					//1. si el primer elemento es mas grande que el segundo, y el orden es ascendente, swapeo
+					//2. si el primer elemento es mas chico que el segundo, y el orden es descendente, swapeo
+					if((pFunc(pElement1, pElement2) > 0 && order == 1) || (pFunc(pElement1, pElement2) < 0 && order == 0))
+					{
+						ll_set(this, i, pElement2); //copio el elemento 2 en el lugar del 1
+						ll_set(this, j, pElement1); //copio el elemento 1 en el lugar del 2
+					}
 				}
 			}
-		}
+			isOk = 0;
 	}
     return isOk;
 }
