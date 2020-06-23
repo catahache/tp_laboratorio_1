@@ -99,13 +99,11 @@ int controller_addBook(LinkedList* pArrayListBook)
 				{
 					ll_add(pArrayListBook, pBook);
 					printf("Alta exitosa\n");
-					//printf("%d", nextId);
 				}//if setters
 				else
 				{
 					free(pBook);
 				}
-			//}//if nextId
 		}//if utn
 		else
 		{

@@ -23,7 +23,6 @@ int parser_BookFromText(FILE* pFile , LinkedList* pArrayListBook)
 			if(fscanf(pFile, "%[^,],%[^,],%[^,],%[^,],%[^\n]\n", id, nameB, author, price, year) == 5)
 			{
 				//imprime mientras fscanf devuelva 5
-				//printf("%s - %s - %s\n", a, b, c);
 				pBook = book_newParametros(id, nameB, author, price, year);
 
 				if(pBook != NULL)//osea si pudo cargar
@@ -54,9 +53,7 @@ int parser_BookFromBinary(FILE* pFile , LinkedList* pArrayListBook)
 	{
 		do
 		{
-			pBook = book_new(); //reservo lugar para un book
-			//lectura fantasma
-			//fread(pEmployee, sizeof(Employee), 1, pFile);//primera linea
+			pBook = book_new(); //reservo lugar para un libro
 			if(fread(pBook, sizeof(Book), 1, pFile) == 1) //leo datos binarios y valido si me leyo 1
 			{
 				ll_add(pArrayListBook, pBook);

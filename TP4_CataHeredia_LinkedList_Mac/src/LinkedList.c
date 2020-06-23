@@ -140,14 +140,7 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
  */
 int ll_add(LinkedList* this, void* pElement)
 {
-    int isOk = -1;
-
-    if(this != NULL)
-    {
-    	isOk = addNode(this, ll_len(this), pElement);
-    }
-
-    return isOk;
+    return addNode(this, ll_len(this), pElement);
 }
 
 /** \brief Retorna un puntero al elemento que se encuentra en el indice especificado
@@ -161,17 +154,15 @@ int ll_add(LinkedList* this, void* pElement)
 void* ll_get(LinkedList* this, int index)
 {
     void* pElement = NULL;
-    Node* pNodeAux;
+    Node* pNodeAux = NULL;
 
-    if(this != NULL && index < ll_len(this) && index >= 0)
-    {
-    	pNodeAux = getNode(this, index);
-    	pElement = pNodeAux->pElement;
-    }
-    else
-    {
-    	pElement = NULL;
-    }
+	pNodeAux = getNode(this, index);
+	if(pNodeAux != NULL)
+	{
+		pElement = pNodeAux->pElement;
+	}
+
+
     return pElement;
 }
 
@@ -189,17 +180,14 @@ int ll_set(LinkedList* this, int index,void* pElement)
 {
     int isOk = -1;
     Node* pNodeAux;
+	pNodeAux = getNode(this, index);
 
-    if(this != NULL && index < ll_len(this) && index >= 0)
-    {
-    	pNodeAux = getNode(this, index);
+	if(pNodeAux != NULL)
+	{
+		pNodeAux->pElement = pElement;
+		isOk = 0;
+	}
 
-    	if(pNodeAux != NULL)
-    	{
-    		pNodeAux->pElement = pElement;
-    		isOk = 0;
-    	}
-    }
 
     return isOk;
 }
@@ -220,25 +208,30 @@ int ll_remove(LinkedList* this,int index)
     Node* pPrevNode;
     Node* pNextNode;
 
-    if(this != NULL && index < ll_len(this) && index >= 0)
-    {
-    	pNodeAux = getNode(this, index); //dir memo
-    	pNextNode = getNode(this, index + 1); //dir memo nodo siguiente al actual
+	pNodeAux = getNode(this, index); //dir memo
+	pNextNode = getNode(this, index + 1); //dir memo nodo siguiente al actual
 
-    	if(index == 0)
-    	{
-    		this->pFirstNode = pNextNode; //nodo siguiente al actual
-    	}
-    	else
-    	{
-    		pPrevNode = getNode(this, index - 1);
-    		pPrevNode->pNextNode = pNextNode;
-    	}
-
-    	free(pNodeAux);
-    	this->size--;
-    	isOk = 0;
-    }
+	if(pNodeAux != NULL)//no valido pNextNode, porque puede ser NULL
+	{
+		if(index == 0)
+		{
+			this->pFirstNode = pNextNode; //nodo siguiente al actual = this->pFirstNode = pNodeAux->pNextNode
+			free(pNodeAux);
+			this->size--;
+			isOk = 0;
+		}
+		else
+		{
+			pPrevNode = getNode(this, index - 1);
+			if(pPrevNode != NULL)
+			{
+				pPrevNode->pNextNode = pNextNode;
+				free(pNodeAux);
+				this->size--;
+				isOk = 0;
+			}
+		}
+	}
 
     return isOk;
 }
@@ -281,9 +274,9 @@ int ll_deleteLinkedList(LinkedList *this)
 {
     int isOk = -1;
 
-	if (this != NULL && ll_clear(this) == 0)
+	if (this != NULL && !ll_clear(this))
 	{
-		free(this);
+		free(this); //libero la linkedlist
 		isOk = 0;
 	}
     return isOk;
@@ -307,9 +300,10 @@ int ll_indexOf(LinkedList* this, void* pElement)
     	for(int i = 0; i < ll_len(this); i++)
     	{
     		pNodeAux = getNode(this, i);
-    		if(pNodeAux->pElement == pElement)
+    		if(pNodeAux != NULL && pNodeAux->pElement == pElement)
     		{
-    			indexNode = i;
+				indexNode = i;
+				break;//PRIMERA ocurrencia
     		}
     	}
     }
@@ -331,13 +325,13 @@ int ll_isEmpty(LinkedList* this)
 
     if(this != NULL)
     {
-    	if(ll_len(this) == 0)
+    	if(ll_len(this))
     	{
-    		isEmpty = 1;
+    		isEmpty = 0; //no esta vacia
     	}
-    	else if (ll_len(this) > 0)
+    	else
     	{
-    		isEmpty = 0;
+    		isEmpty = 1;//esta vacia
     	}
     }
 
@@ -357,13 +351,17 @@ int ll_push(LinkedList* this, int index, void* pElement)
 {
     int isOk = -1;
 
-    if(this != NULL && index <= ll_len(this) && index >= 0)
-    {
+    //if(this != NULL && index <= ll_len(this) && index >= 0)
+    //{
     	isOk = addNode(this, index, pElement);
-    }
+   // }
 
     return isOk;
 }
+//usarlo en alguna funcion pasandole 0 y se usa igual al add
+//lista que tengo que atender con prioridades quiza
+//asignar un campo de prioridad de lectura?
+//o campo de genero... y que se inserte segun el genero quiza...
 
 
 /** \brief Elimina el elemento de la posicion indicada y retorna su puntero
@@ -381,11 +379,15 @@ void* ll_pop(LinkedList* this,int index)
     if(this != NULL && index <= ll_len(this) && index >= 0)
     {
     	pElement = ll_get(this, index);
-    	ll_remove(this, index);
+    	if(pElement != NULL)
+    	{
+    		ll_remove(this, index);
+    	}
     }
 
     return pElement;
 }
+//quiza para asignar ese elemento a otro vagon...
 
 
 /** \brief Comprueba si existe el elemento que se le pasa como parámetro.
