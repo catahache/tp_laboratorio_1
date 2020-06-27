@@ -272,7 +272,8 @@ int controller_ListBook(LinkedList* pArrayListBook)
 	int retorno = -1;
 	if(pArrayListBook != NULL)
 	{
-		printf("\n    ID                                 Libro                       Autor         Precio   Anio\n\n");
+		printf("\n  ID      Libro                                       Autor                      Precio   Anio\n");
+		printf("--------------------------------------------------------------------------------------------------\n");
 		for(int i = 0; i < ll_len(pArrayListBook); i++)
 		{
 			book_printBook(pArrayListBook, i);

@@ -221,7 +221,22 @@ int book_printBook(LinkedList* pArrayListBook, int index)
 		   book_getPrice(pBook, &auxPrice) == 0 &&
 		   book_getYear(pBook, &auxYear) == 0)
 		{
-			printf("%5d    %40s    %20s    %10.2f   %4d\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+			if(auxId > 0 && auxId < 10)
+			{
+				printf("[000%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+			}
+			else if(auxId > 9 && auxId < 100)
+			{
+				printf("[00%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+			}
+			else if(auxId > 99 && auxId < 1000)
+			{
+				printf("[0%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+			}
+			else
+			{
+				printf("[%4d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+			}
 		}
 		else
 		{
