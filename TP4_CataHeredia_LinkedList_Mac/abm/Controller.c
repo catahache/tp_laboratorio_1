@@ -154,7 +154,8 @@ int controller_editBook(LinkedList* pArrayListBook)
 			if(index > -1)
 			{
 				//mostrar el libro
-				printf("\n    ID                                 Libro                       Autor         Precio   Anio\n\n");
+				printf("\n   ID         Libro                                        Autor                   Precio       Anio\n");
+				printf("o-----------------------------------------------------------------------------------------------------o\n");
 				book_printBook(pArrayListBook, index);//imprimo el libro elegido
 
 				do
@@ -245,7 +246,8 @@ int controller_removeBook( LinkedList* pArrayListBook)
 			{
 				pBook = ll_get(pArrayListBook, index);
 				//mostrar el libro
-				printf("\n    ID                                 Libro                       Autor         Precio   Anio\n\n");
+				printf("\n   ID         Libro                                        Autor                   Precio       Anio\n");
+				printf("o-----------------------------------------------------------------------------------------------------o\n");
 				book_printBook(pArrayListBook, index);//imprimo el libro elegido
 
 				printf("Confirma la eliminacion del libro? y/n: ");
@@ -272,8 +274,8 @@ int controller_ListBook(LinkedList* pArrayListBook)
 	int retorno = -1;
 	if(pArrayListBook != NULL)
 	{
-		printf("\n  ID      Libro                                       Autor                      Precio   Anio\n");
-		printf("--------------------------------------------------------------------------------------------------\n");
+		printf("\n   ID         Libro                                        Autor                   Precio       Anio\n");
+		printf("o-----------------------------------------------------------------------------------------------------o\n");
 		for(int i = 0; i < ll_len(pArrayListBook); i++)
 		{
 			book_printBook(pArrayListBook, i);
@@ -457,7 +459,8 @@ int controller_relocate(LinkedList* pArrayListBook)
 		index = book_SearchForId(pArrayListBook, id);
 		if(index > -1)
 		{
-			printf("\n    ID                                 Libro                       Autor         Precio   Anio\n\n");
+			printf("\n   ID         Libro                                        Autor                   Precio       Anio\n");
+			printf("o-----------------------------------------------------------------------------------------------------o\n");
 			book_printBook(pArrayListBook, index);
 
 			printf("Confirma la reubicacion del elemento? y/n: ");

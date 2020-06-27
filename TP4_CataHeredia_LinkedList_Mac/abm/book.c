@@ -223,19 +223,19 @@ int book_printBook(LinkedList* pArrayListBook, int index)
 		{
 			if(auxId > 0 && auxId < 10)
 			{
-				printf("[000%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+				printf(" [000%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
 			}
 			else if(auxId > 9 && auxId < 100)
 			{
-				printf("[00%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+				printf(" [00%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
 			}
 			else if(auxId > 99 && auxId < 1000)
 			{
-				printf("[0%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+				printf(" [0%d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
 			}
 			else
 			{
-				printf("[%4d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
+				printf(" [%4d]    -> %-40s    %-20s    $ %-8.2f   [%4d]\n", auxId, auxNameB, auxAuthor, auxPrice, auxYear);
 			}
 		}
 		else
@@ -312,7 +312,7 @@ int changeYear(LinkedList* pArrayListBook, int index)
 
 	pBook = ll_get(pArrayListBook, index);
 
-	if(utn_getEntero(&newYear, 2, "Ingrese nuevo anio de publicacion de 1900 aa 2020: ", "Error, anio invalido.\n", 1900, 2020) == 0)
+	if(utn_getEntero(&newYear, 2, "Ingrese nuevo anio de publicacion de 1900 a 2020: ", "Error, anio invalido.\n", 1900, 2020) == 0)
 	{
 		book_setYear(pBook, newYear);
 		retorno = 0;
@@ -365,7 +365,7 @@ int book_sort(LinkedList* pArrayListBook)
 			case 1:
 				//Id
 				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
-				printf("Espere unos segundos, por favor.\n");
+				printf("-> Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListBook, book_sortById, orden);
 				controller_ListBook(pArrayListBook);
 				retorno = 0;
@@ -373,7 +373,7 @@ int book_sort(LinkedList* pArrayListBook)
 			case 2:
 				//NameB
 				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
-				printf("Espere unos segundos, por favor.\n");
+				printf("-> Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListBook, book_sortByNameB, orden);
 				controller_ListBook(pArrayListBook);
 				retorno = 0;
@@ -381,7 +381,7 @@ int book_sort(LinkedList* pArrayListBook)
 			case 3:
 				//Author
 				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
-				printf("Espere unos segundos, por favor.\n");
+				printf("-> Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListBook, book_sortByAuthor, orden);
 				controller_ListBook(pArrayListBook);
 				retorno = 0;
@@ -389,7 +389,7 @@ int book_sort(LinkedList* pArrayListBook)
 			case 4:
 				//Price
 				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
-				printf("Espere unos segundos, por favor.\n");
+				printf("-> Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListBook, book_sortByPrice, orden);
 				controller_ListBook(pArrayListBook);
 				retorno = 0;
@@ -397,7 +397,7 @@ int book_sort(LinkedList* pArrayListBook)
 			case 5:
 				//Year
 				utn_getEntero(&orden, 2, "1 ascendente o 0 descendente: ", "Error\n", 0, 1);
-				printf("Espere unos segundos, por favor.\n");
+				printf("-> Espere unos segundos, por favor.\n");
 				ll_sort(pArrayListBook, book_sortByYear, orden);
 				controller_ListBook(pArrayListBook);
 				retorno = 0;

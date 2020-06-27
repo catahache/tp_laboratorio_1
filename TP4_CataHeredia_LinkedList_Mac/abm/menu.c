@@ -16,19 +16,19 @@ int menu()
 
 	system("clear");
 
-	printf("***** M E N U  B I B L I O T E C A *****\n\n");
-	printf("  1. Cargar los datos de los libros desde el archivo dataLibros.csv (modo texto).\n");
-	printf("  2. Cargar los datos de los libros desde el archivo dataLibros.bin (modo binario).\n");
-	printf("  3. Alta de libros\n");
-	printf("  4. Modificar datos de libros\n");
-	printf("  5. Baja de libros\n");
-	printf("  6. Listar libros\n");
-	printf("  7. Ordenar libros\n");
-	printf("  8. Reubicar libro\n");
-	printf("  9. Guardar copia de seguridad del archivo en dataLibrosSeguridad.bin (modo binario).\n");
-	printf("  10. Guardar los datos de los libros en el archivo dataLibros.csv (modo texto).\n");
-	printf("  11. Guardar los datos de los libros en el archivo dataLibros.bin (modo binario).\n");
-	printf("  12. Salir\n\n");
+	printf("                ***** M E N U  B I B L I O T E C A *****\n\n\n");
+	printf("  (1)  Cargar los datos de los libros desde el archivo dataLibros.csv (modo texto).\n\n");
+	printf("  (2)  Cargar los datos de los libros desde el archivo dataLibros.bin (modo binario).\n\n");
+	printf("  (3)  Alta de libros\n\n");
+	printf("  (4)  Modificar datos de libros\n\n");
+	printf("  (5)  Baja de libros\n\n");
+	printf("  (6)  Listar libros\n\n");
+	printf("  (7)  Ordenar libros\n\n");
+	printf("  (8)  Reubicar libro\n\n");
+	printf("  (9)  Guardar copia de seguridad del archivo en dataLibrosSeguridad.bin (modo binario).\n\n");
+	printf("  (10) Guardar los datos de los libros en el archivo dataLibros.csv (modo texto).\n\n");
+	printf("  (11) Guardar los datos de los libros en el archivo dataLibros.bin (modo binario).\n\n");
+	printf("  (12) Salir\n\n\n");
 
 	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 12);
 	return option;
