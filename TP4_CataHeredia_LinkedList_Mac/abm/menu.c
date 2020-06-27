@@ -16,19 +16,20 @@ int menu()
 
 	system("clear");
 
-	printf("***** M E N U *****\n\n");
-	printf("  1. Cargar los datos de los libros desde el archivo data.csv (modo texto).\n");
-	printf("  2. Cargar los datos de los libros desde el archivo data.csv (modo binario).\n");
+	printf("***** M E N U  B I B L I O T E C A *****\n\n");
+	printf("  1. Cargar los datos de los libros desde el archivo dataLibros.csv (modo texto).\n");
+	printf("  2. Cargar los datos de los libros desde el archivo dataLibros.bin (modo binario).\n");
 	printf("  3. Alta de libros\n");
 	printf("  4. Modificar datos de libros\n");
 	printf("  5. Baja de libros\n");
 	printf("  6. Listar libros\n");
 	printf("  7. Ordenar libros\n");
-	printf("  8. Guardar los datos de los libros en el archivo data.csv (modo texto).\n");
-	printf("  9. Guardar los datos de los libros en el archivo data.csv (modo binario).\n");
-	printf("  10. Salir\n\n");
+	printf("  8. Guardar copia de seguridad del archivo en dataLibrosSeguridad.bin (modo binario).\n");
+	printf("  9. Guardar los datos de los libros en el archivo dataLibros.csv (modo texto).\n");
+	printf("  10. Guardar los datos de los libros en el archivo dataLibros.bin (modo binario).\n");
+	printf("  11. Salir\n\n");
 
-	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 10);
+	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 11);
 	return option;
 }
 
@@ -40,7 +41,7 @@ int menuEdit()
 
 	system("clear");
 
-	printf("***** M O D I F I C A R *****\n\n");
+	printf("***** M O D I F I C A R  L I B R O *****\n\n");
 	printf("  1. Nombre del libro\n");
 	printf("  2. Autor\n");
 	printf("  3. Precio\n");
@@ -59,7 +60,7 @@ int menuSort()
 
 	system("clear");
 
-	printf("***** O R D E N A R *****\n\n");
+	printf("***** O R D E N A R  L I B R O S *****\n\n");
 	printf("  1. Por ID\n");
 	printf("  2. Por Nombre del libro\n");
 	printf("  3. Por Autor\n");

@@ -16,8 +16,8 @@ int controller_loadFromText(char* path , LinkedList* pArrayListBook)
 {
 	int retorno = -1;
 	FILE* pFile;
-	pFile = fopen(path, "r");
 
+	pFile = fopen(path, "r");
 
 	if(pFile != NULL)
 	{
@@ -35,6 +35,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListBook)
 	{
 		printf("Error null\n");
 	}
+
 	fclose(pFile);
     return retorno;
 }
@@ -80,6 +81,8 @@ int controller_addBook(LinkedList* pArrayListBook)
 
 	Book* pBook = book_new(); //malloc
 
+
+
 	if(pArrayListBook != NULL && pBook != NULL)
 	{
 		if(!utn_getCadena(auxNameB, NAMEB_LEN, 2, "Ingrese nombre del libro: ", "Error, nombre invalido.\n\n") &&
@@ -89,21 +92,28 @@ int controller_addBook(LinkedList* pArrayListBook)
 		{
 			normalizeStr(auxAuthor);//normalizo nombre del autor
 
-				nextId = book_lastId(pArrayListBook) + 1; //lo que retorne la funcion + 1
+			obtenerId(&nextId);
 
-				if(!book_setId(pBook, nextId) &&
-				   !book_setNameB(pBook, auxNameB) &&
-				   !book_setAuthor(pBook, auxAuthor) &&
-				   !book_setPrice(pBook, auxPrice) &&
-				   !book_setYear(pBook, auxYear))
+
+			//nextId = book_lastId(pArrayListBook) + 1; //lo que retorne la funcion + 1
+
+			if(!book_setId(pBook, nextId) &&
+			   !book_setNameB(pBook, auxNameB) &&
+			   !book_setAuthor(pBook, auxAuthor) &&
+			   !book_setPrice(pBook, auxPrice) &&
+			   !book_setYear(pBook, auxYear))
+			{
+				if(ll_add(pArrayListBook, pBook) == 0)
 				{
-					ll_add(pArrayListBook, pBook);
 					printf("Alta exitosa\n");
-				}//if setters
-				else
-				{
-					free(pBook);
+					actualizarId(nextId);//incremento en 1
 				}
+
+			}//if setters
+			else
+			{
+				free(pBook);
+			}
 		}//if utn
 		else
 		{
@@ -358,5 +368,71 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListBook)
 	}
 
     return retorno;
+}
+
+
+
+int obtenerId(int* id)
+{
+	int error = 1;
+	*id = 1001;//proximo
+
+	FILE* f;
+	f = fopen("proximoId.bin", "rb");
+	if(f != NULL)
+	{
+		fread(id, sizeof(int), 1, f);
+		fclose(f);
+		error = 0;
+	}
+
+	return error;
+}
+
+int actualizarId(int id)
+{
+	int error = 1;
+	id++;
+
+	FILE* f = fopen("proximoId.bin", "wb");
+	if(f != NULL)
+	{
+		fwrite(&id, sizeof(int), 1, f);
+		fclose(f);
+		error = 0;
+	}
+
+	return error;
+}
+
+int controller_SecuritySave(char* path, LinkedList* pArrayListBook)
+{
+	int retorno = -1;
+	FILE* pFile;
+	LinkedList* cloneArray = NULL;
+	Book* pBook;
+
+	if(pArrayListBook != NULL)
+	{
+		cloneArray = ll_clone(pArrayListBook);
+
+		if(cloneArray != NULL && ll_containsAll(pArrayListBook, cloneArray))
+		{
+			pFile = fopen(path, "wb");//binario
+			for(int i = 1; i < ll_len(cloneArray); i++)//desde la pos 1
+			{
+				pBook = (Book*) ll_get(cloneArray, i);
+				fwrite(pBook, sizeof(Book), 1, pFile);
+			}
+			fclose(pFile);
+			printf("Archivo guardado!\n");
+			retorno = 0;
+		}
+		else
+		{
+		 printf("error");
+		}
+	}
+	return retorno;
 }
 

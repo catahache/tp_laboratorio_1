@@ -343,7 +343,7 @@ int book_sort(LinkedList* pArrayListBook)
 	int retorno = -1;
 	int orden;
 
-	if(pArrayListBook != NULL)
+	if(pArrayListBook != NULL && ll_isEmpty(pArrayListBook) == 0)
 	{
 		switch(menuSort())
 		{

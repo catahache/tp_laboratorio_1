@@ -161,8 +161,6 @@ void* ll_get(LinkedList* this, int index)
 	{
 		pElement = pNodeAux->pElement;
 	}
-
-
     return pElement;
 }
 
@@ -334,7 +332,6 @@ int ll_isEmpty(LinkedList* this)
     		isEmpty = 1;//esta vacia
     	}
     }
-
     return isEmpty;
 }
 
@@ -349,19 +346,10 @@ int ll_isEmpty(LinkedList* this)
  */
 int ll_push(LinkedList* this, int index, void* pElement)
 {
-    int isOk = -1;
 
-    //if(this != NULL && index <= ll_len(this) && index >= 0)
-    //{
-    	isOk = addNode(this, index, pElement);
-   // }
+    return addNode(this, index, pElement);
 
-    return isOk;
 }
-//usarlo en alguna funcion pasandole 0 y se usa igual al add
-//lista que tengo que atender con prioridades quiza
-//asignar un campo de prioridad de lectura?
-//o campo de genero... y que se inserte segun el genero quiza...
 
 
 /** \brief Elimina el elemento de la posicion indicada y retorna su puntero
@@ -379,15 +367,14 @@ void* ll_pop(LinkedList* this,int index)
     if(this != NULL && index <= ll_len(this) && index >= 0)
     {
     	pElement = ll_get(this, index);
-    	if(pElement != NULL)
+    	if(ll_remove(this, index) == -1)//si falla ll remove
     	{
-    		ll_remove(this, index);
+    		pElement = NULL;
     	}
     }
 
     return pElement;
 }
-//quiza para asignar ese elemento a otro vagon...
 
 
 /** \brief Comprueba si existe el elemento que se le pasa como parámetro.
@@ -429,35 +416,24 @@ int ll_contains(LinkedList *this, void *pElement) {
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
-    int len = 0;
-
     void* pElem;
+    int sizeThis2;
 
     if(this != NULL & this2 != NULL)
     {
-    	returnAux = 0;
-    	if(ll_len(this) >= ll_len(this2))
-    	{
-    		for(int i = 0; i < ll_len(this2); i++)
-    		{
-    			pElem = ll_get(this2, i);
-    			if(ll_contains(this, pElem) == 1)//si el elemento de this2 esta en this
-    			{
-    				len++;
-    			}
-    			else
-    			{
-    				break;
-    			}
-    		}
-    	}
+    	sizeThis2 = ll_len(this2);
+    	returnAux = 1;//si nunca entra al if, todos los elems estan contenidos
 
-    	if(len == ll_len(this2))//si recorrio toda la longitud de this2, significa que todos sus elems estan en this
-    	{
-    		returnAux = 1;
-    	}
+		for(int i = 0; i < sizeThis2; i++)
+		{
+			pElem = ll_get(this2, i);
+			if(!ll_contains(this, pElem))//si el elemento de this2 no esta en this
+			{
+				returnAux = 0;
+				break;
+			}
+		}
     }
-
     return returnAux;
 }
 
@@ -474,10 +450,9 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
-    Node* pNode;
-    int indexNode = 0;
+    void* pElement;
 
-    if(this != NULL && from >= 0 && from <= ll_len(this) && to >= from && to <= ll_len(this))
+    if(this != NULL && from >= 0 && from <= ll_len(this) && to > from && to <= ll_len(this))
     {
     	cloneArray = ll_newLinkedList();//pido espacio
 
@@ -485,12 +460,8 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     	{
     		for(int i = from; i < to; i++)
 			{
-				pNode = getNode(this, i);
-				if(pNode != NULL)
-				{
-					addNode(cloneArray, i, pNode->pElement);
-					indexNode++;
-				}
+    			pElement = ll_get(this, i);
+    			ll_add(cloneArray, pElement);
 			}
     	}
     }
@@ -509,10 +480,7 @@ LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
 
-    if(this != NULL)
-    {
-    	cloneArray = ll_subList(this, 0, ll_len(this));//desde 0 hasta el tamanio de this
-    }
+    cloneArray = ll_subList(this, 0, ll_len(this));//desde 0 hasta el tamanio de this
 
     return cloneArray;
 }
@@ -533,23 +501,23 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 
     if(this != NULL && pFunc != NULL && (order == 0 || order == 1) )
 	{
-    		for(int i = 0; i < ll_len(this) - 1 ; i++)
+		for(int i = 0; i < ll_len(this) - 1 ; i++)
+		{
+			for(int j = i + 1; j < ll_len(this); j++)
 			{
-				for(int j = i + 1; j < ll_len(this); j++)
-				{
-					pElement1 = ll_get(this, i);
-					pElement2 = ll_get(this, j);
+				pElement1 = ll_get(this, i);
+				pElement2 = ll_get(this, j);
 
-					//1. si el primer elemento es mas grande que el segundo, y el orden es ascendente, swapeo
-					//2. si el primer elemento es mas chico que el segundo, y el orden es descendente, swapeo
-					if((pFunc(pElement1, pElement2) > 0 && order == 1) || (pFunc(pElement1, pElement2) < 0 && order == 0))
-					{
-						ll_set(this, i, pElement2); //copio el elemento 2 en el lugar del 1
-						ll_set(this, j, pElement1); //copio el elemento 1 en el lugar del 2
-					}
+				//1. si el primer elemento es mas grande que el segundo, y el orden es ascendente, swapeo
+				//2. si el primer elemento es mas chico que el segundo, y el orden es descendente, swapeo
+				if((pFunc(pElement1, pElement2) > 0 && order == 1) || (pFunc(pElement1, pElement2) < 0 && order == 0))
+				{
+					ll_set(this, i, pElement2); //copio el elemento 2 en el lugar del 1
+					ll_set(this, j, pElement1); //copio el elemento 1 en el lugar del 2
 				}
 			}
-			isOk = 0;
+		}
+		isOk = 0;
 	}
     return isOk;
 }

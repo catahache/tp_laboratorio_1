@@ -15,6 +15,4 @@ C_DEPS :=
 SUBDIRS := \
 abm \
 src \
-testing/src \
-testing \
 

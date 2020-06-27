@@ -65,4 +65,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListBook);
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListBook);
 
-
+int proximoId();
+int obtenerId(int* id);
+int actualizarId(int id);
+int controller_SecuritySave(char* path, LinkedList* pArrayListBook);
