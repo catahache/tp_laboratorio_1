@@ -114,9 +114,10 @@ int abmBooks()
 				}
 				break;
             case 8:
+            	//reubicar libro
             	if(flagText == 1 || flagBin == 1)
             	{
-            	controller_SecuritySave("dataLibrosSeguridad.bin", listaLibros);
+            	controller_relocate(listaLibros);
             	}
             	else
 				{
@@ -126,7 +127,7 @@ int abmBooks()
             case 9:
             	if(flagText == 1 || flagBin == 1)
             	{
-            		controller_saveAsText("dataLibros.csv", listaLibros);
+            	controller_SecuritySave("dataLibrosSeguridad.bin", listaLibros);
             	}
             	else
 				{
@@ -136,7 +137,7 @@ int abmBooks()
             case 10:
             	if(flagText == 1 || flagBin == 1)
             	{
-            		controller_saveAsBinary("dataLibros.bin", listaLibros);
+            		controller_saveAsText("dataLibros.csv", listaLibros);
             	}
             	else
 				{
@@ -144,6 +145,16 @@ int abmBooks()
 				}
             	break;
             case 11:
+            	if(flagText == 1 || flagBin == 1)
+            	{
+            		controller_saveAsBinary("dataLibros.bin", listaLibros);
+            	}
+            	else
+				{
+					printf("Error. Aun no se cargo ningun archivo.\n");
+				}
+            	break;
+            case 12:
             	printf("Confirma salir? y/n: ");
             	fpurge(stdin);
             	scanf("%c", &confirm);

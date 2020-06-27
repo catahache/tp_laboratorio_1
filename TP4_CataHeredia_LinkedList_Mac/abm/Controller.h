@@ -69,3 +69,4 @@ int proximoId();
 int obtenerId(int* id);
 int actualizarId(int id);
 int controller_SecuritySave(char* path, LinkedList* pArrayListBook);
+int controller_relocate(LinkedList* pArrayListBook);

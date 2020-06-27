@@ -24,12 +24,13 @@ int menu()
 	printf("  5. Baja de libros\n");
 	printf("  6. Listar libros\n");
 	printf("  7. Ordenar libros\n");
-	printf("  8. Guardar copia de seguridad del archivo en dataLibrosSeguridad.bin (modo binario).\n");
-	printf("  9. Guardar los datos de los libros en el archivo dataLibros.csv (modo texto).\n");
-	printf("  10. Guardar los datos de los libros en el archivo dataLibros.bin (modo binario).\n");
-	printf("  11. Salir\n\n");
+	printf("  8. Reubicar libro\n");
+	printf("  9. Guardar copia de seguridad del archivo en dataLibrosSeguridad.bin (modo binario).\n");
+	printf("  10. Guardar los datos de los libros en el archivo dataLibros.csv (modo texto).\n");
+	printf("  11. Guardar los datos de los libros en el archivo dataLibros.bin (modo binario).\n");
+	printf("  12. Salir\n\n");
 
-	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 11);
+	utn_getEntero(&option, 3, "Ingrese opcion: ", "Error, no es una opcion valida\n", 1, 12);
 	return option;
 }
 

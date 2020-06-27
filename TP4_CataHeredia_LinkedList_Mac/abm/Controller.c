@@ -436,3 +436,62 @@ int controller_SecuritySave(char* path, LinkedList* pArrayListBook)
 	return retorno;
 }
 
+int controller_relocate(LinkedList* pArrayListBook)
+{
+	int retorno = -1;
+	int id;
+	int nextId;
+	int index;
+	Book* pBook;
+	int id2;
+	int index2;
+	char confirm;
+
+	if(pArrayListBook != NULL)
+	{
+		controller_ListBook(pArrayListBook);
+		obtenerId(&nextId);
+		utn_getEntero(&id, 2, "Ingrese ID del libro a reubicar: ", "Error, ID incorrecto.\n\n", 1, nextId - 1);//el maximo es el ultimo id
+
+		index = book_SearchForId(pArrayListBook, id);
+		if(index > -1)
+		{
+			printf("\n    ID                                 Libro                       Autor         Precio   Anio\n\n");
+			book_printBook(pArrayListBook, index);
+
+			printf("Confirma la reubicacion del elemento? y/n: ");
+			fpurge(stdin);
+			scanf("%c", &confirm);
+			if(confirm == 'y')
+			{
+				pBook = (Book*) ll_pop(pArrayListBook, index);//me devuelve un puntero al elemento en el indice pasado por parametros
+				controller_ListBook(pArrayListBook);
+
+				if(utn_getEntero(&id2, 2, "Luego de que libro quiere insertarlo? Ingresar ID: ", "Error, ID incorrecto.\n\n", 1, nextId - 1)==0)
+				{
+					index2 = book_SearchForId(pArrayListBook, id2);
+					if(index2 > -1)
+					{
+						ll_push(pArrayListBook, index2+1, pBook);
+					}
+					else
+					{
+						printf("Error, ID inexistente.\n\n");
+						//hacer que si sale mal, devuelva el libro a la posicion original:
+						ll_push(pArrayListBook, index, pBook);
+					}
+				}
+				else
+				{
+					ll_push(pArrayListBook, index, pBook);;
+				}
+			}
+		}
+		else
+		{
+			printf("Error, ID inexistente.\n\n");
+		}
+	}
+
+	return retorno;
+}
