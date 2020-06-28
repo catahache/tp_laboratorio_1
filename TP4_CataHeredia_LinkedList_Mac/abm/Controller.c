@@ -422,14 +422,17 @@ int controller_SecuritySave(char* path, LinkedList* pArrayListBook)
 		if(cloneArray != NULL && ll_containsAll(pArrayListBook, cloneArray))
 		{
 			pFile = fopen(path, "wb");//binario
-			for(int i = 1; i < ll_len(cloneArray); i++)//desde la pos 1
+			if(pFile != NULL)
 			{
-				pBook = (Book*) ll_get(cloneArray, i);
-				fwrite(pBook, sizeof(Book), 1, pFile);
+				for(int i = 1; i < ll_len(cloneArray); i++)//desde la pos 1
+				{
+					pBook = (Book*) ll_get(cloneArray, i);
+					fwrite(pBook, sizeof(Book), 1, pFile);
+				}
+				fclose(pFile);
+				printf("Archivo guardado!\n");
+				retorno = 0;
 			}
-			fclose(pFile);
-			printf("Archivo guardado!\n");
-			retorno = 0;
 		}
 		else
 		{
