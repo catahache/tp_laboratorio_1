@@ -65,8 +65,32 @@ int controller_saveAsText(char* path , LinkedList* pArrayListBook);
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListBook);
 
-int proximoId();
+/*
+ * \brief Lee el ID guardado en el archivo proximoID.bin
+ * \param int* id: puntero a entero id en el que se guardara el id obtenido
+ * \param pArrayListBook LinkedList*, LinkedList
+ * \return 1 en caso de error y 0 en caso de exito
+ */
 int obtenerId(int* id);
+
+/*
+ * \brief Actualiza sumandole 1 el ID guardado en el archivo proximoID.bin
+ * \param int id: id a actualizar
+ * \return 1 en caso de error y 0 en caso de exito
+ */
 int actualizarId(int id);
+
+/*
+ * \brief Crea una copia de seguridad del archivo dataLibros
+ * \param char* path: path donde se guardara la copia
+ * \param LinkedList* pArrayListBook: LinkedList
+ * \return -1 en caso de error y 0 en caso de exito
+ */
 int controller_SecuritySave(char* path, LinkedList* pArrayListBook);
+
+/*
+ * \brief Reubica un libro en la posicion indicada
+ * \param LinkedList* pArrayListBook: LinkedList
+ * \return -1 en caso de error y 0 en caso de exito
+ */
 int controller_relocate(LinkedList* pArrayListBook);

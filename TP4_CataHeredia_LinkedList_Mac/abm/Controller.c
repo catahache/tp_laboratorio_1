@@ -477,6 +477,7 @@ int controller_relocate(LinkedList* pArrayListBook)
 					if(index2 > -1)
 					{
 						ll_push(pArrayListBook, index2+1, pBook);
+						retorno = 0;
 					}
 					else
 					{
